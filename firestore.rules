@@ -2,15 +2,18 @@ rules_version = '2';
 service cloud.firestore {
  match /databases/{database}/documents {
   function signedIn(){ return request.auth != null; }
-  function member(){ return signedIn() && request.auth.uid in ['kSFnEXMK95T9mMZpL38CuO6QHN73','TUvacrmQWQNBSX1zRjNnZwtErAz1','IXSGXv1G5LavLlg5g5tQdIYsGDb2','PQhmVXBORBc5kC1Op9GMjbyhNbz2','JJwtIoCJDxfy6Xu1KvP7maIrG6t1']; }
-  function admin(){ return signedIn() && request.auth.uid == 'JJwtIoCJDxfy6Xu1KvP7maIrG6t1'; }
+  function activeMember(uid){ return signedIn() && exists(/databases/$(database)/documents/members/$(uid)) && get(/databases/$(database)/documents/members/$(uid)).data.enabled == true; }
+  function member(){ return activeMember(request.auth.uid); }
+  function admin(){ return member() && get(/databases/$(database)/documents/members/$(request.auth.uid)).data.role == 'admin'; }
+  match /members/{uid} { allow get: if member(); allow list, create, update, delete: if false; }
   match /questions/{id} { allow read: if member(); allow write: if admin(); }
   match /progress/{uid} { allow read: if member(); allow create, update: if member() && request.auth.uid == uid; allow delete: if false; }
   match /results/{id} {
    allow read: if member();
    allow create: if member() && request.resource.data.uid == request.auth.uid
+    && request.resource.data.code == get(/databases/$(database)/documents/members/$(request.auth.uid)).data.code
     && request.resource.data.score is int && request.resource.data.score >= 0 && request.resource.data.score <= 100
-    && request.resource.data.total is int && request.resource.data.total == 30
+    && request.resource.data.total == 30
     && request.resource.data.right is int && request.resource.data.right >= 0 && request.resource.data.right <= 30;
    allow update, delete: if false;
   }
