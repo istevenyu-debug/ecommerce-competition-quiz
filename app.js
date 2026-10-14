@@ -1,18 +1,142 @@
-import {firebaseConfig} from './firebase-config.js';
-const el=document.querySelector('#app'), labels={trade:'國貿大會考',ecom:'電子商務與跨境電商',mixed:'兩者綜合'}, publicCodes=['15','18','31','Steven','管理者'];
-let A,F,auth,db,user,qs=[],contexts={},progress={},wrong={},mode='trade',set=[],answers=[],pos=0,wrongOnly=false;
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const shuffle=a=>{let b=[...a];for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
-const pool=m=>qs.filter(q=>m==='mixed'||q.source===m);
-function pickThirty(p){let fresh=p.filter(q=>!progress[q.id]),seen=shuffle(p.filter(q=>progress[q.id]));return [...shuffle(fresh),...seen].slice(0,30)}
-async function loadQuestions(){const local=await(await fetch('./questions.json')).json();qs=local;try{const snap=await F.getDocs(F.collection(db,'questions'));if(!snap.empty)qs=snap.docs.map(d=>d.data())}catch(e){console.warn('題庫載入使用內附版本',e.message)}}
-function login(){el.innerHTML=`<section><h2>會員登入</h2><p class="muted">請使用管理者提供的學校信箱與密碼。</p><input id="email" type="email" autocomplete="username" placeholder="電子郵件"/><input id="password" type="password" autocomplete="current-password" placeholder="密碼"/><button id="go">登入</button><p id="err" role="alert"></p></section>`;el.querySelector('#go').onclick=async()=>{const email=el.querySelector('#email').value.trim().toLowerCase();if(!email){el.querySelector('#err').textContent='請輸入信箱';return}try{await A.signInWithEmailAndPassword(auth,email,el.querySelector('#password').value)}catch(e){el.querySelector('#err').textContent='登入失敗，請確認信箱與密碼。'}}}
-function home(){const p=pool(mode),done=p.filter(q=>progress[q.id]).length,wc=p.filter(q=>wrong[q.id]).length;el.innerHTML=`<h2>${esc(user.code)}${user.role==='admin'?'（管理者）':'｜會員'}｜${labels[mode]}</h2><p>本卷已練 ${done}/${p.length} 題，錯題 ${wc} 題</p><progress value="${done}" max="${p.length||1}"></progress><div class="row"><select id="mode">${Object.entries(labels).map(([k,v])=>`<option value="${k}" ${k===mode?'selected':''}>${v}</option>`).join('')}</select><button id="start">開始 30 題</button><button class="secondary" id="wrong">錯題練習</button></div><div class="row"><button class="secondary" id="scores">全體成績</button>${user.role==='admin'?'<button id="manage">管理題庫</button>':''}<button class="secondary" id="logout">登出</button></div><small>系統優先安排未練題目；刷完全部題目後，會再循環練習。混合卷同樣從兩個題庫完整輪替抽題。</small>`;el.querySelector('#mode').onchange=e=>{mode=e.target.value;home()};el.querySelector('#start').onclick=()=>start(false);el.querySelector('#wrong').onclick=()=>start(true);el.querySelector('#scores').onclick=scores;el.querySelector('#logout').onclick=()=>A.signOut(auth);el.querySelector('#manage')?.addEventListener('click',manage)}
-function start(w){wrongOnly=w;const p=pool(mode);if(w){set=shuffle(p.filter(q=>wrong[q.id])).slice(0,30);if(!set.length){alert('這個題庫目前沒有錯題');return}}else set=pickThirty(p);if(set.length<30){alert(`目前可用題目 ${set.length} 題，尚未達到一卷 30 題。`);return}answers=Array(30).fill(-1);pos=0;show()}
-function sourcePanel(q){if(!q.contextRequired)return '';const excerpt=contexts[`${q.source}:${Number(q.page)||1}`]||'此題需參照原始案例頁，請核對題幹與來源頁。';return `<div class="case"><b>題目參照資料：${q.source==='trade'?'國貿大會考':'電子商務與跨境電商'}原始考題，第 ${esc(q.page||1)} 頁</b><pre style="white-space:pre-wrap;font:inherit;max-height:420px;overflow:auto">${esc(excerpt)}</pre></div>`}
-function show(){const q=set[pos];el.innerHTML=`<div class="row"><span>第 ${pos+1}/30 題</span><span>原題 ${esc(q.id)}｜${esc(q.section||'')}</span></div>${sourcePanel(q)}<h3>${esc(q.question)}</h3>${q.options.map((o,i)=>`<button class="option ${answers[pos]===i?'selected':''}" data-n="${i}">${'ABCD'[i]}. ${esc(o)}</button>`).join('')}<div class="row"><button class="secondary" id="back" ${pos===0?'disabled':''}>上一題</button><button id="next">${pos===29?'交卷':'下一題'}</button></div>`;el.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{answers[pos]=+b.dataset.n;show()});el.querySelector('#back').onclick=()=>{if(pos){pos--;show()}};el.querySelector('#next').onclick=()=>{if(answers[pos]<0){alert('請先作答');return}if(++pos===30)finish();else show()}}
-async function finish(){let right=0;set.forEach((q,i)=>{progress[q.id]=(progress[q.id]||0)+1;if(answers[i]===q.answer){right++;delete wrong[q.id]}else wrong[q.id]=true});const r={uid:user.uid,code:user.code,mode:wrongOnly?'錯題練習｜'+labels[mode]:labels[mode],score:Math.round(right/30*100),right,total:30,time:Date.now()};try{await F.setDoc(F.doc(db,'progress',user.uid),{progress,wrong,updatedAt:Date.now()});await F.addDoc(F.collection(db,'results'),r)}catch(e){el.textContent='成績儲存失敗：'+e.message;return}el.innerHTML=`<h2>得分 ${r.score}</h2><p>答對 ${right}/30 題</p><button id="review">查看詳解</button><button class="secondary" id="home">回首頁</button>`;el.querySelector('#review').onclick=review;el.querySelector('#home').onclick=home}
-function review(){el.innerHTML='<h2>本卷答案與解析</h2><p class="muted">原始題庫沒有提供逐題解析；此處列出正確答案與完整選項，並可對照原始 PDF。</p>'+set.map((q,i)=>`<div class="case"><b>${i+1}. ${esc(q.question)}</b>${sourcePanel(q)}<p>你的答案：${answers[i]<0?'未作答':'ABCD'[answers[i]]}；正解：<b>${'ABCD'[q.answer]}</b></p>${q.options.map((o,j)=>`<p>${'ABCD'[j]}. ${esc(o)} ${j===q.answer?'✓ 正確答案':''}</p>`).join('')}</div>`).join('')+'<button id="home">回首頁</button>';el.querySelector('#home').onclick=home}
-async function scores(){el.textContent='讀取成績中…';try{const rows=(await F.getDocs(F.collection(db,'results'))).docs.map(d=>d.data()).sort((a,b)=>b.time-a.time);const members=publicCodes.map(code=>({code}));el.innerHTML='<h2>全體成績</h2><table><tr><th>會員</th><th>練習次數</th><th>平均</th><th>最高</th></tr>'+members.map(m=>{const a=rows.filter(r=>r.code===m.code&&!r.mode.startsWith('錯題'));return `<tr><td>${esc(m.code)}</td><td>${a.length}</td><td>${a.length?Math.round(a.reduce((s,r)=>s+r.score,0)/a.length):'—'}</td><td>${a.length?Math.max(...a.map(r=>r.score)):'—'}</td></tr>`}).join('')+'</table><h3>全部練習紀錄</h3><table><tr><th>會員</th><th>題庫</th><th>成績</th><th>時間</th></tr>'+rows.map(r=>`<tr><td>${esc(r.code)}</td><td>${esc(r.mode)}</td><td>${r.score}</td><td>${new Date(r.time).toLocaleString('zh-TW')}</td></tr>`).join('')+'</table><button id="home">回首頁</button>';el.querySelector('#home').onclick=home}catch(e){el.textContent='讀取失敗：'+e.message}}
-function manage(){el.innerHTML=`<h2>管理題庫（僅管理者）</h2><p>目前共 ${qs.length} 題。可匯入完整 JSON 題庫陣列，儲存後同步至雲端。欄位格式須包含 id、source（trade/ecom）、question、options（四個選項）、answer（0～3）；contextRequired 題目以 page 欄位連結 PDF 參考頁。</p><textarea id="json" spellcheck="false"></textarea><div class="row"><button id="save">驗證並儲存整份題庫</button><button class="secondary" id="back">回首頁</button></div><p id="status"></p>`;el.querySelector('#json').value=JSON.stringify(qs,null,2);el.querySelector('#back').onclick=home;el.querySelector('#save').onclick=async()=>{const status=el.querySelector('#status');try{const data=JSON.parse(el.querySelector('#json').value);if(!Array.isArray(data)||data.length<30||data.some(q=>!q.id||!['trade','ecom'].includes(q.source)||!q.question||!Array.isArray(q.options)||q.options.length!==4||![0,1,2,3].includes(q.answer)))throw Error('格式錯誤：每題須有 id、source、question、四個 options 與 0～3 的 answer');const seen=new Set();for(const q of data){if(seen.has(q.id))throw Error('題號重複：'+q.id);seen.add(q.id)}status.textContent='正在安全寫入…';for(let i=0;i<data.length;i+=400){const batch=F.writeBatch(db);data.slice(i,i+400).forEach(q=>batch.set(F.doc(db,'questions',String(q.id)),q));await batch.commit()}qs=data;status.textContent=`完成：${data.length} 題已同步。`;home()}catch(e){status.textContent='未儲存：'+e.message}}}
-async function init(){[qs,contexts]=await Promise.all([(await fetch('./questions.json')).json(),(await fetch('./contexts.json')).json()]);if(!firebaseConfig.apiKey){el.innerHTML='<h2>Firebase 尚未設定</h2>';return}const[core,a,f]=await Promise.all([import('https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js'),import('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js'),import('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js')]);A=a;F=f;const app=core.initializeApp(firebaseConfig);auth=a.getAuth(app);db=f.getFirestore(app);a.onAuthStateChanged(auth,async u=>{if(!u){user=null;login();return}const member=await f.getDoc(f.doc(db,'members',u.uid));if(!member.exists()||member.data().enabled!==true){await a.signOut(auth);el.textContent='此帳號尚未開通，請聯絡管理者。';return}user={uid:u.uid,...member.data()};try{await loadQuestions();const snap=await f.getDoc(f.doc(db,'progress',u.uid));progress=snap.exists()?snap.data().progress||{}:{};wrong=snap.exists()?snap.data().wrong||{}:{};home()}catch(e){el.textContent='載入失敗：'+e.message}})}init().catch(e=>el.textContent='啟動失敗：'+e.message);
+'use strict';
+(() => {
+  const root = document.getElementById('app');
+  const labels = {trade:'國貿大會考', ecom:'電子商務與跨境電商', mixed:'兩者綜合'};
+  const key = 'ecommerce-quiz-local-v1';
+  const empty = {seen:{}, wrong:{}, history:[], includeCases:false, mode:'trade', draft:null};
+  let state;
+  try { state = Object.assign({}, empty, JSON.parse(localStorage.getItem(key) || '{}')); }
+  catch { state = Object.assign({}, empty); }
+  state.seen = state.seen || {};
+  state.wrong = state.wrong || {};
+  state.history = Array.isArray(state.history) ? state.history : [];
+  let questions = [], mode = labels[state.mode] ? state.mode : 'trade', paper = [], answers = [], index = 0, wrongOnly = false;
+
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const mix = items => {const a = [...items]; for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a;};
+  const eligible = m => questions.filter(q => (m==='mixed' || q.source===m) && (state.includeCases || !q.contextRequired));
+  function persist() {try {localStorage.setItem(key, JSON.stringify(state));return true;} catch {return false;}}
+  function button(id, text, secondary=false) {return '<button type="button" id="'+id+'"'+(secondary?' class="secondary"':'')+'>'+esc(text)+'</button>';}
+  function pick(m, n) {
+    const candidates = eligible(m);
+    const fresh = mix(candidates.filter(q => !state.seen[q.id]));
+    const used = mix(candidates.filter(q => state.seen[q.id]));
+    used.sort((a,b)=>(state.seen[a.id]||0)-(state.seen[b.id]||0));
+    return [...fresh, ...used].slice(0,n);
+  }
+  function switchMode(next) {mode=next;state.mode=next;persist();home();}
+  function home() {
+    const available=eligible(mode);
+    const covered=available.filter(q=>state.seen[q.id]).length;
+    const mistakes=available.filter(q=>state.wrong[q.id]).length;
+    const allCases=questions.filter(q=>q.contextRequired).length;
+    root.innerHTML = '<div class="topline"><span class="eyebrow">練習首頁</span><span class="chip">免登入・本機紀錄</span></div>'
+      +'<h2>選擇刷題模式</h2>'
+      +'<label for="choose-mode">題庫分類</label>'
+      +'<select id="choose-mode">'+Object.entries(labels).map(([k,v])=>'<option value="'+k+'"'+(mode===k?' selected':'')+'>'+v+'</option>').join('')+'</select>'
+      +'<div class="metrics"><div><strong>'+covered+' / '+available.length+'</strong><small>已刷題數</small></div><div><strong>'+mistakes+'</strong><small>待練錯題</small></div><div><strong>'+state.history.length+'</strong><small>最近成績筆數</small></div></div>'
+      +'<progress max="'+(available.length||1)+'" value="'+covered+'"></progress><p class="muted">新題優先，直到目前選擇的全部題目都至少練過一次。</p>'
+      +'<div class="actions">'+button('new-test','開始 30 題')+button('wrong-test','錯題練習 ('+mistakes+')',true)+button('history','近 10 次練習成績',true)+'</div>'
+      +(state.draft?'<p class="notice">'+button('continue','繼續上次未完成的練習',true)+'</p>':'')
+      +'<div class="setting"><label><input id="include-case" type="checkbox" '+(state.includeCases?'checked':'')+'>包含信用狀案例題（需搭配原始 PDF 附表）</label>'
+      +'<p class="muted">原始國貿題庫有 '+allCases+' 道案例題需要參考信用狀、發票或提單。未勾選時先練習可獨立作答的題目；勾選後也會納入抽題。</p></div>'
+      +'<p class="footnote">正式成績只儲存在目前瀏覽器，最多保留最近 10 筆。換裝置或清除網站資料可能遺失紀錄；錯題練習不列入成績。</p>';
+    root.querySelector('#choose-mode').onchange = e => switchMode(e.target.value);
+    root.querySelector('#include-case').onchange = e => {state.includeCases=e.target.checked;persist();home();};
+    root.querySelector('#new-test').onclick=()=>start(false);
+    root.querySelector('#wrong-test').onclick=()=>start(true);
+    root.querySelector('#history').onclick=showHistory;
+    const resume=root.querySelector('#continue');
+    if (resume) resume.onclick=resumeDraft;
+  }
+  function start(wrong) {
+    const available = wrong ? mix(eligible(mode).filter(q=>state.wrong[q.id])).slice(0,30)
+      : mode==='mixed' ? mix([...pick('trade',15), ...pick('ecom',15)]) : pick(mode,30);
+    if (!available.length) {alert(wrong?'目前沒有待複習的錯題。':'題庫還沒有可練習的題目。');return;}
+    if (!wrong && available.length!==30) {alert('目前不足 30 題，無法開始正式練習。');return;}
+    paper=available;answers=Array(paper.length).fill(-1);index=0;wrongOnly=wrong;
+    draft();showQuestion();
+  }
+  function draft() {
+    state.draft={mode, ids:paper.map(q=>q.id), answers, index, wrongOnly, includeCases:state.includeCases};
+    persist();
+  }
+  function resumeDraft() {
+    const d=state.draft;
+    if (!d) return;
+    const byId=new Map(questions.map(q=>[q.id,q]));
+    paper=d.ids.map(id=>byId.get(id)).filter(Boolean);
+    if(paper.length!==d.ids.length) {state.draft=null;persist();alert('題庫已更新，請開始新一卷。');home();return;}
+    answers=d.answers;index=Math.max(0,Math.min(d.index,paper.length-1));wrongOnly=d.wrongOnly;mode=d.mode;
+    state.includeCases=!!d.includeCases;showQuestion();
+  }
+  function contextNotice(q) {
+    if(!q.contextRequired) return '';
+    return '<details class="context"><summary>本題需要信用狀／單據附表，請先查看</summary>'
+      +'<p>請搭配您原始的《國際貿易大會考題庫》PDF 第 '+esc(q.page)+' 頁附近的附件（信用狀、發票、匯票或提單）。'
+      +'目前網站未收錄可完整獨立閱讀的附件，若手邊沒有 PDF，可先在首頁取消「包含信用狀案例題」。</p></details>';
+  }
+  function showQuestion() {
+    const q=paper[index];
+    const chosen=answers[index];
+    root.innerHTML='<div class="topline"><span class="eyebrow">'+esc(labels[mode])+'</span><span class="chip">'+(wrongOnly?'錯題複習':'正式練習')+'</span></div>'
+      +'<p class="muted">第 '+(index+1)+' / '+paper.length+' 題 · 原題 '+esc(q.id)+'</p>'
+      +'<progress max="'+paper.length+'" value="'+(index+1)+'"></progress>'
+      +'<p class="category">'+esc(q.section||'')+'</p>'
+      +contextNotice(q)+'<h2 class="question">'+esc(q.question)+'</h2>'
+      +q.options.map((o,j)=>'<button type="button" class="option'+(chosen===j?' selected':'')+'" data-choice="'+j+'"><span class="letter">'+('ABCD'[j])+'</span><span>'+esc(o)+'</span></button>').join('')
+      +'<div class="actions nav">'+button('previous','上一題',true)+button('next',index===paper.length-1?'交卷':'下一題')+'</div>'
+      +'<div class="actions nav">'+button('exit','暫存並回首頁',true)+'</div>';
+    root.querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>{answers[index]=Number(b.dataset.choice);draft();showQuestion();});
+    root.querySelector('#previous').disabled=index===0;
+    root.querySelector('#previous').onclick=()=>{if(index>0){index--;draft();showQuestion();}};
+    root.querySelector('#next').onclick=()=>{
+      if(answers[index]<0) {alert('請先選擇答案。');return;}
+      if(index===paper.length-1) finish();
+      else {index++;draft();showQuestion();}
+    };
+    root.querySelector('#exit').onclick=home;
+  }
+  function finish() {
+    let correct=0;
+    paper.forEach((q,i)=>{
+      state.seen[q.id]=(Number(state.seen[q.id])||0)+1;
+      if(answers[i]===q.answer) {correct++;delete state.wrong[q.id];}
+      else state.wrong[q.id]=true;
+    });
+    const score=Math.round(correct*100/paper.length);
+    if(!wrongOnly) {
+      state.history.unshift({time:Date.now(),mode:labels[mode],score,correct,total:paper.length});
+      state.history=state.history.slice(0,10);
+    }
+    state.draft=null;
+    persist();
+    root.innerHTML='<div class="topline"><span class="eyebrow">完成練習</span><span class="chip">'+(wrongOnly?'錯題複習':'正式成績')+'</span></div>'
+      +'<h2>本次得分 <span class="score">'+score+'</span> 分</h2>'
+      +'<p>答對 '+correct+' / '+paper.length+' 題。'+(wrongOnly?'錯題練習不計入近 10 次成績。':'已儲存在此瀏覽器的近 10 次成績中。')+'</p>'
+      +'<div class="actions">'+button('review','逐題檢討')+button('home','回到首頁',true)+'</div>';
+    root.querySelector('#review').onclick=review;
+    root.querySelector('#home').onclick=home;
+  }
+  function review() {
+    root.innerHTML='<h2>本卷答案檢討</h2>'
+      +'<p class="muted">依照題庫提供的正確答案與四個選項檢討；原始題庫未提供完整的逐題解析。</p>'
+      +paper.map((q,i)=>'<section class="review '+(answers[i]===q.answer?'correct':'incorrect')+'">'
+        +'<h3>'+(i+1)+'. '+esc(q.question)+'</h3>'+contextNotice(q)
+        +'<p>你的答案：<b>'+('ABCD'[answers[i]]||'—')+'</b>　正確答案：<b>'+('ABCD'[q.answer]||'—')+'</b></p>'
+        +q.options.map((o,j)=>'<p class="'+(j===q.answer?'right':'')+'">'+('ABCD'[j])+'. '+esc(o)+(j===q.answer?' ✓':'')+'</p>').join('')+'</section>').join('')
+      +button('home','回首頁',true);
+    root.querySelector('#home').onclick=home;
+  }
+  function showHistory() {
+    root.innerHTML='<h2>近 10 次練習成績</h2>'
+      +(state.history.length?'<div class="table-scroll"><table><thead><tr><th>練習時間</th><th>題庫模式</th><th>成績</th></tr></thead><tbody>'
+        +state.history.slice(0,10).map(r=>'<tr><td>'+new Date(r.time).toLocaleString('zh-TW')+'</td><td>'+esc(r.mode)+'</td><td><b>'+r.score+' 分</b> ('+r.correct+'/'+r.total+')</td></tr>').join('')
+        +'</tbody></table></div>':'<p>目前尚無正式練習成績。</p>')
+      +'<p class="muted">錯題練習不列入，紀錄只保存在這台裝置的這個瀏覽器。</p>'+button('home','返回首頁');
+    root.querySelector('#home').onclick=home;
+  }
+  fetch('./questions.json', {cache:'no-store'}).then(r=>{if(!r.ok) throw Error('無法讀取題庫 questions.json');return r.json();})
+    .then(qs=>{if(!Array.isArray(qs)||qs.some(q=>!q.id||!q.question||q.options?.length!==4||![0,1,2,3].includes(q.answer))) throw Error('題庫資料格式不正確');questions=qs;home();})
+    .catch(e=>{root.innerHTML='<h2>題庫載入失敗</h2><p>'+esc(e.message)+'</p><button id="again">重新載入</button>';root.querySelector('#again').onclick=()=>location.reload();});
+})();

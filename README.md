@@ -1,19 +1,27 @@
-# 電商比賽刷題 APP
+# 電商比賽刷題 APP｜免會員版
 
-使用 GitHub Pages + Firebase Authentication + Cloud Firestore。學生登入後可練習國貿大會考、電子商務與跨境電商、兩者綜合三種題庫；每次 30 題，優先抽尚未練習題，並提供錯題練習與全體成績。管理者可在 APP 管理題庫頁匯入 JSON。
+學生網址（需先在 GitHub 設定啟用 Pages）：
+https://istevenyu-debug.github.io/ecommerce-competition-quiz/
 
-## Firebase 初次設定
+## 練習功能
+- 免帳號、免密碼、完全不使用 Firebase。
+- 三種題庫：國貿大會考（目前匯入 392 題）、電子商務與跨境電商（100 題）、兩者綜合。
+- 每次正式練習 30 題；綜合卷國貿 15 題＋電商 15 題。
+- 未刷題優先；每題皆可透過循環練習接觸。已練數以作答完成的題目計算。
+- 錯題練習最多 30 題；答對從錯題清單移除，答錯保留。
+- 首頁「近 10 次練習成績」；錯題練習不計入正式成績。
+- 每人進度、錯題、最近 10 筆成績儲存在**自己的瀏覽器 localStorage**，不上傳雲端。不同手機／瀏覽器不共用；清除網站資料會遺失。
+- 未完成的一卷可在同一瀏覽器繼續作答。
+- 答案檢討：顯示正確答案和各選項，**原始 PDF 不含完整逐題詳解**，因此不宣稱有逐題詳解。
 
-1. Firebase Authentication 啟用「電子郵件/密碼」。
-2. Firestore 建立資料庫，將 `firestore.rules` 發布。
-3. 在 Authentication 建立會員後，以每個 Firebase Auth 使用者 UID 為文件 ID，在 `members` 建立文件：`{code: "15", role: "member", enabled: true}`。另三位會員代碼按實際設定；管理者資料為 `{code: "管理者", role: "admin", enabled: true}`。額外測試會員可使用 `Steven` 代碼。此集合文件只能由專案擁有者在 Firebase Console 管理。
-4. 將 Firebase Web app config 填入 `firebase-config.js`。Firebase Web API key 是前端識別設定，請勿放入 Admin SDK 私鑰。
-5. Authentication → 設定 → 授權網域，加入本 GitHub Pages 網域。
+## 案例題提醒
+國貿題庫有部分信用狀、匯票、發票、提單的案例題（目前 49 題）需參考原始 PDF 第 58–80 頁的附件圖文。
+首頁預設不納入這些題目，避免不具備完整附件時無法作答。學生可以勾選「包含信用狀案例題」以將其納入出卷，但需要自行搭配原始 PDF。待附件完整製作後可再更新。
+國貿目前已匯入 392 題（包含案例題）；原始 PDF 可能有少數未辨識題目，尚待逐題校對。
 
-## GitHub Pages
+## 部署
+Pages：Repository → Settings → Pages → Build and deployment → Source 選 **GitHub Actions**。
+`.github/workflows/pages.yml` 將在 main 分支更新時驗證題庫並自動發布。若首次設定前部署失敗，先啟用 Pages 後重新執行工作流程。
+**請勿**選擇 Deploy from a branch，因為本儲存庫使用 Actions 發布。
 
-在 Repository Settings → Pages，將 Build and deployment source 設為 GitHub Actions。推送到 `main` 後由 `.github/workflows/pages.yml` 自動部署。
-
-## 題庫與資料
-
-`questions.json` 有 492 題（國貿 392、電商 100），`contexts.json` 提供需要附表題的原始案例頁節錄。各題答案和題幹來自提供的題庫檔案，仍建議教師校對，原題未附逐題解析；APP 顯示答案及選項供檢討。公開 GitHub Pages 的題目與答案可被網站訪客檢視，不適合機密測驗。
+題庫與答案屬於教學練習用途，公開專案使題目和答案可被網頁訪客檢視。
