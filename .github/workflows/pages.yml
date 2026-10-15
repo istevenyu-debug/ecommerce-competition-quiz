@@ -18,14 +18,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check application syntax and question bank
+      - name: Check app syntax and chapter groups
         run: |
           node --check app.js
-          node -e "const q=require('./questions.json'); if(q.length<400||q.some(x=>!x.id||!x.question||!Array.isArray(x.options)||x.options.length!==4||!Number.isInteger(x.answer)||x.answer<0||x.answer>3)) process.exit(1); console.log('Validated '+q.length+' questions')"
+          node test/check-bank.cjs
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp index.html app.js questions.json .nojekyll _site/
+          cp index.html app.js questions.json chapter-groups.json .nojekyll _site/
       - uses: actions/configure-pages@v5
         with:
           enablement: true

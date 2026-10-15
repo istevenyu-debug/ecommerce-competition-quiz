@@ -1,35 +1,97 @@
 <!doctype html>
-<html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#173659">
-<title>電商比賽刷題 APP</title>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#183f65">
+<title>電商比賽刷題 APP｜分章節練習</title>
 <style>
-:root{font-family:system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#243c53;background:#edf3f9}
-*{box-sizing:border-box}body{max-width:860px;margin:0 auto;padding:20px 14px 60px}
-header h1{font-size:clamp(1.35rem,4.3vw,2rem);margin:8px 0}header p{color:#62788b;margin:6px 0 20px}
-#app{background:white;padding:clamp(18px,4vw,32px);border-radius:20px;box-shadow:0 10px 32px rgba(37,61,87,.09)}
-h2{font-size:clamp(1.1rem,4vw,1.5rem);margin:12px 0 18px}.question{line-height:1.65;white-space:pre-wrap}
-button,select{font:inherit;border-radius:10px;padding:11px 15px}
+:root{font-family:system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#263b50;background:#edf3f9}
+*{box-sizing:border-box}
+body{max-width:890px;margin:0 auto;padding:18px 12px 60px}
+header h1{font-size:clamp(1.4rem,4vw,2rem);margin:6px 0}
+header p{color:#62798f;margin:4px 0 22px;line-height:1.55}
+#app{background:#fff;padding:clamp(18px,3.5vw,32px);border-radius:20px;box-shadow:0 10px 32px rgba(37,61,87,.09)}
+h2{font-size:clamp(1.2rem,3.6vw,1.55rem);margin:18px 0 14px}
+h3{font-size:1.1rem}
+p{line-height:1.65}
+button,select{font:inherit;border-radius:11px;padding:11px 16px}
 button{background:#245f9c;border:1px solid #245f9c;color:#fff;cursor:pointer;font-weight:600}
-button:hover{filter:brightness(.96)}button:disabled{opacity:.45;cursor:default}
-button.secondary{background:#eaf2fc;color:#24537f;border-color:#b9cde2}
-select{width:100%;background:white;color:inherit;border:1px solid #b9cde2;margin:10px 0 18px}
-label{font-weight:600}.muted,.footnote{color:#677f93;font-size:.91rem;line-height:1.7}
+button:hover{filter:brightness(.96)}
+button:focus-visible,select:focus-visible{outline:3px solid #65a9ed;outline-offset:2px}
+button:disabled{opacity:.45;cursor:not-allowed}
+button.secondary{background:#eaf2fc;color:#24537f;border-color:#bad0e4}
+.muted,.footnote{color:#617a8e;font-size:.92rem;line-height:1.65}
 .topline{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.eyebrow{color:#366aa0;font-size:.89rem;font-weight:700}.chip{background:#f0f6fc;color:#365d83;padding:6px 11px;border-radius:20px;font-size:.8rem}
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 18px}
-.metrics>div{background:#f2f7fc;border-radius:12px;padding:13px 9px;text-align:center}.metrics strong{display:block;font-size:clamp(1rem,3vw,1.45rem)}.metrics small{display:block;color:#697f93;font-size:.77rem}
-progress{width:100%;height:14px;accent-color:#347eb4}
-.actions{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0 10px}.actions button{flex:1 1 145px}
-.option{display:flex;align-items:flex-start;width:100%;gap:12px;text-align:left;margin:10px 0;background:#f5f9ff;color:#193a59;border:1.5px solid #c8daea;line-height:1.55;font-weight:500;white-space:pre-wrap}
-.option.selected{background:#cfe6fc;border-color:#276ca8;outline:2px solid #a9cae7}
-.letter{flex:0 0 30px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#e0eaf5;height:30px;font-weight:800}
-.category{font-size:.86rem;color:#667f94}.setting{border-top:1px solid #e0eaf4;padding-top:14px;margin-top:24px}.setting input{accent-color:#267ab1}
-.context{border:1px solid #e1d3ae;background:#fffbf0;border-radius:10px;padding:12px;margin:15px 0;line-height:1.6}
-.context summary{cursor:pointer;font-weight:600}.review{padding:16px;margin:14px 0;border:1px solid #e1eaf3;border-radius:12px}
-.review.correct{border-left:5px solid #339c73}.review.incorrect{border-left:5px solid #d58459}
-.review h3{font-size:1rem;line-height:1.6}.right{font-weight:700;color:#22794e}.score{font-size:1.5em;color:#206b9a}
-.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.91rem}th,td{border-bottom:1px solid #e0e9f2;text-align:left;padding:12px 8px}th{background:#f6f9fd;white-space:nowrap}
-.notice{background:#f2f7fc;border-radius:12px;padding:6px 10px}
-@media(max-width:480px){body{padding:12px 9px}.metrics{gap:5px}.metrics>div{padding:10px 4px}.actions button{flex-basis:100%}.nav button{flex-basis:40%}}
-</style></head><body><header><h1>電商比賽刷題 APP</h1><p>國貿大會考 × 電子商務與跨境電商｜免登入・每卷 30 題</p></header>
-<main id="app" aria-live="polite">正在載入題庫…</main>
-<script src="./app.js" defer></script></body></html>
+.eyebrow{color:#286ca4;font-size:.9rem;font-weight:700}
+.chip{background:#eaf3fc;color:#285b85;padding:5px 11px;border-radius:24px;font-size:.8rem;white-space:nowrap}
+.mode-card,.chapter-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:left;width:100%;color:#203e5e;background:#f8fbff;border:1px solid #cdddea;border-radius:15px;padding:17px 38px 17px 17px;margin:12px 0;gap:5px;font-weight:500}
+.mode-card:hover,.chapter-card:hover{background:#ebf5ff;border-color:#94bfde}
+.mode-card.mixed{background:#f2f8fe}
+.mode-title,.chapter-title{font-size:1.08rem;font-weight:750;line-height:1.55}
+.mode-meta,.chapter-sub{font-size:.9rem;color:#52718d}
+.mode-detail{font-size:.83rem;color:#687f93}
+.mode-arrow{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:2rem;color:#83a7c5}
+.chapter-grid{margin:18px 0}
+.thin-track{background:#ddeaf5;border-radius:10px;width:100%;height:6px;overflow:hidden;margin-top:8px}
+.thin-progress{background:#438bc0;display:block;height:100%;border-radius:10px}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:18px 0 12px}
+.metrics>div{background:#f0f6fc;border-radius:12px;padding:13px 8px;text-align:center}
+.metrics strong{display:block;font-size:clamp(.97rem,3vw,1.45rem);white-space:nowrap}
+.metrics small{display:block;color:#657e95;font-size:.78rem}
+progress{width:100%;height:13px;accent-color:#327fb3}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0 4px}
+.actions button{flex:1 1 148px;min-height:44px}
+.group-card{padding:18px;border:1px solid #cfdeec;background:#fbfdff;border-radius:14px;margin:16px 0}
+.group-heading{display:flex;align-items:center;justify-content:space-between;gap:9px}
+.group-heading strong{font-size:1.14rem}
+.group-card p{margin:8px 0}
+.group-card .actions{margin-top:16px}
+.group-progress{font-size:.91rem}
+.chapter-tools{margin:16px 0}
+.chapter-tools button{width:100%}
+.case-warning{margin:20px 0;padding:15px;background:#fff8e7;border:1px solid #e6c77a;border-radius:12px}
+.case-warning p{margin:7px 0;font-size:.9rem}
+.setting{border-top:1px solid #dfeaf4;padding-top:16px;margin:18px 0}
+.setting input{accent-color:#2168a1;width:17px;height:17px;vertical-align:middle}
+.mix-balance{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:15px 0}
+.mix-balance div{background:#eff6fd;padding:16px;border-radius:13px;display:flex;flex-direction:column;gap:5px}
+.mix-balance strong{font-size:.94rem}
+.mix-balance span{font-size:1.35rem;font-weight:750}
+.resume-box{margin:21px 0;background:#f3f7fd;border:1px solid #c9deec;border-radius:12px;padding:14px}
+.resume-box p{margin:5px 0 10px}
+.section-title{margin-top:28px}
+.category{color:#668198;font-size:.9rem}
+.question{white-space:pre-wrap;line-height:1.72;margin-bottom:22px;overflow-wrap:anywhere}
+.option{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:13px;margin:10px 0;background:#f6faff;border:1.5px solid #c8daea;color:#193a59;font-weight:500;line-height:1.58;white-space:pre-wrap;overflow-wrap:anywhere}
+.option.selected{background:#d4eafb;border-color:#3379b5;outline:2px solid #9bc7e8}
+.letter{flex:0 0 31px;height:31px;display:flex;justify-content:center;align-items:center;border-radius:50%;background:#e3ecf8;font-weight:800}
+.context{border:1px solid #e2cb8b;background:#fffbef;border-radius:11px;padding:12px;line-height:1.65;margin:14px 0}
+.context summary{font-weight:700;cursor:pointer}
+.review{border:1px solid #dfe8f0;border-radius:13px;padding:16px;margin:14px 0;overflow-wrap:anywhere}
+.review.correct{border-left:5px solid #28916a}
+.review.incorrect{border-left:5px solid #c77b4f}
+.review h3{font-size:1rem;line-height:1.6}
+.right{color:#1b7951;font-weight:750}
+.score{font-size:1.5em;color:#1f6b9a}
+.table-scroll{overflow-x:auto;margin:15px 0}
+table{border-collapse:collapse;width:100%;font-size:.91rem}
+th,td{border-bottom:1px solid #e0eaf3;text-align:left;padding:12px 8px}
+th{background:#f4f8fc;white-space:nowrap}
+@media(max-width:530px){
+body{padding:10px 8px 60px}
+#app{padding:17px 12px}
+.mode-card,.chapter-card{padding:13px 36px 13px 12px}
+.metrics{gap:5px}
+.metrics>div{padding:9px 4px}
+.mix-balance{grid-template-columns:1fr 1fr}
+.actions button{flex-basis:100%}
+.nav button{flex-basis:40%}
+}
+</style>
+</head>
+<body>
+<header><h1>電商比賽刷題 APP</h1><p>國貿大會考 × 電子商務與跨境電商｜依章節分組，每卷最多 30 題</p></header>
+<main id="app" aria-live="polite">正在載入完整題庫與章節分組…</main>
+<script src="./app.js?v=20261015-chapters" defer></script>
+</body></html>
