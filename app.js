@@ -235,10 +235,13 @@
       attachmentNote(q)+'<h2 class="question">'+escapeHTML(q.question)+'</h2>'+
       q.options.map((o,j)=>'<button type="button" class="option'+(checked===j?' selected':'')+'" data-option="'+j+'" aria-pressed="'+(checked===j?'true':'false')+'">'+
         '<span class="letter">'+('ABCD'[j])+'</span><span>'+escapeHTML(o)+'</span></button>').join('')+
+      '<p class="muted">'+(pos===questionCount-1?'最後一題：選好答案後請按「交卷」。':'點選答案會直接跳至下一題，按「上一題」可修改作答。')+'</p>'+ 
       '<div class="actions nav">'+button('previous','上一題',true)+button('next',pos===questionCount-1?'交卷':'下一題')+'</div>'+
       '<div class="actions">'+button('pause','暫存並回首頁',true)+'</div>');
     root.querySelectorAll('[data-option]').forEach(el=>el.onclick=()=>{
-      answers[pos]=Number(el.dataset.option);saveDraft();showQuestion();
+      answers[pos]=Number(el.dataset.option);
+      if(pos < paper.length-1) pos++; // Answering advances immediately, last answer waits for explicit submission.
+      saveDraft();showQuestion();
     });
     root.querySelector('#previous').disabled=pos===0;
     root.querySelector('#previous').onclick=()=>{if(pos>0){pos--;saveDraft();showQuestion();}};
