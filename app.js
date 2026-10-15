@@ -235,17 +235,22 @@
       attachmentNote(q)+'<h2 class="question">'+escapeHTML(q.question)+'</h2>'+
       q.options.map((o,j)=>'<button type="button" class="option'+(checked===j?' selected':'')+'" data-option="'+j+'" aria-pressed="'+(checked===j?'true':'false')+'">'+
         '<span class="letter">'+('ABCD'[j])+'</span><span>'+escapeHTML(o)+'</span></button>').join('')+
-      '<p class="muted">'+(pos===questionCount-1?'最後一題：選好答案後請按「交卷」。':'點選答案會直接跳至下一題，按「上一題」可修改作答。')+'</p>'+ 
-      '<div class="actions nav">'+button('previous','上一題',true)+button('next',pos===questionCount-1?'交卷':'下一題')+'</div>'+
+      '<div class="auto-next-tip">'+(pos===questionCount-1?'最後一題：選完答案後按「交卷」即可計分。':'✓ 自動跳題已開啟：直接點 A、B、C、D，立即進入下一題。')+'</div>'+
+      '<div class="actions nav">'+button('previous','上一題',true)+(pos===questionCount-1?button('next','交卷'):(checked>=0?button('next','下一題',true):''))+'</div>'+
       '<div class="actions">'+button('pause','暫存並回首頁',true)+'</div>');
-    root.querySelectorAll('[data-option]').forEach(el=>el.onclick=()=>{
-      answers[pos]=Number(el.dataset.option);
-      if(pos < paper.length-1) pos++; // Answering advances immediately, last answer waits for explicit submission.
-      saveDraft();showQuestion();
+    root.querySelectorAll('[data-option]').forEach(el=>{
+      el.addEventListener('click',()=>{
+        const answeredPosition=pos;
+        answers[answeredPosition]=Number(el.dataset.option);
+        if(answeredPosition<paper.length-1)pos=answeredPosition+1;
+        saveDraft();
+        showQuestion();
+      });
     });
     root.querySelector('#previous').disabled=pos===0;
     root.querySelector('#previous').onclick=()=>{if(pos>0){pos--;saveDraft();showQuestion();}};
-    root.querySelector('#next').onclick=()=>{
+    const nextButton=root.querySelector('#next');
+    if(nextButton)nextButton.onclick=()=>{
       if(answers[pos]<0){alert('請先選擇答案。');return;}
       if(pos===paper.length-1){
         if(answers.some(a=>a<0)){alert('本卷仍有未作答的題目，請先完成。');return;}
