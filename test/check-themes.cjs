@@ -5,7 +5,7 @@ const html=fs.readFileSync('index.html','utf8');
 const app=fs.readFileSync('app.js','utf8');
 for(const type of ['trade','ecom','mixed']){
  assert.ok(html.includes('#app[data-theme="'+type+'"]'),'missing page theme '+type);
- assert.ok(html.includes('data-source="'+type+'"')||type==='mixed','missing tile theme '+type);
+ assert.ok(html.includes('.mode-card[data-source="'+type+'"]')||type==='mixed','missing tile theme '+type);
 }
 assert.ok(app.includes("root.dataset.theme=currentTheme"),'theme not set when rendering');
 assert.ok(app.includes("setTheme(context?.source||state.mode)"),'quiz pages not themed');
