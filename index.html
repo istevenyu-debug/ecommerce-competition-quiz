@@ -192,10 +192,46 @@ body{padding:10px 8px 60px}
 /* Highlight only the original 46A B/L requirements within reference extracts. */
 .lc-excerpts .lc-critical-clause{background:#eaf5ff;border-color:#a9c9df;border-left:4px solid #85b5d4}
 .lc-excerpts .lc-critical-clause .lc-field-title{color:#214d72}
+
+/* Original L/C case documents, shown only when the question needs layout evidence. */
+.lc-all-case-links{background:#eff7fc;border:1px solid #c5deef;border-radius:13px;padding:14px;margin:16px 0}
+.lc-all-case-links button{display:inline-block;width:calc(50% - 6px);margin:5px 3px;text-align:center}
+.lc-doc-review{background:#f6fbff;border:1px solid #bdd8e9;border-radius:13px;padding:13px;margin:12px 0 20px}
+.lc-doc-heading{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap;line-height:1.5;color:#28516e}
+.lc-doc-heading small{font-size:.8rem;color:#648198}
+.lc-doc-hint{font-size:.85rem;color:#557189;line-height:1.6;margin:7px 0 12px}
+.lc-source-fields{display:grid;gap:8px;margin-top:10px}
+.lc-ref-field{background:#fff;border:1px solid #d7e5f0;border-radius:9px;padding:10px}
+.lc-ref-field strong{font-size:.83rem;color:#305d7c}
+.lc-ref-text{font-size:.89rem;line-height:1.65;color:#243c4e;font-family:ui-monospace,Consolas,"Noto Sans TC",monospace;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:6px}
+.lc-bill-highlight{background:#eaf5ff;border-left:4px solid #85b5d4;border-color:#b0ccdf}
+.lc-image-grid{display:flex;align-items:start;gap:9px;flex-wrap:wrap;margin:10px 0}
+.lc-original-preview{flex:1 1 170px;min-width:145px;background:#fff;color:#28587d;border:1px solid #c5dceb;border-radius:10px;padding:10px;font-size:.82rem}
+.lc-original-preview img{display:block;width:100%;height:240px;object-fit:contain;background:#f5f7fa;border-radius:7px}
+.lc-original-preview span{display:block;margin-top:8px;line-height:1.45}
+.lc-optional-images,.lc-original-full{margin-top:12px;border-top:1px solid #d8e5ed;padding-top:8px}
+.lc-optional-images summary,.lc-original-full summary{cursor:pointer;color:#225c85;font-weight:700;padding:8px 2px;line-height:1.6}
+.lc-original-full .lc-ref-field{margin:8px 0}
+.lc-lightbox{position:fixed;inset:0;z-index:9999;background:#111d2b;color:white;display:flex;flex-direction:column;height:100dvh}
+.lc-lightbox-bar{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px max(12px,env(safe-area-inset-right));flex-wrap:wrap}
+.lc-lightbox-bar strong{font-size:.91rem}
+.lc-zoom-actions{display:flex;gap:5px;flex-wrap:wrap}
+.lc-zoom-actions button{background:#354b62;color:#fff;border:1px solid #8191a3;font-size:.85rem;padding:7px 11px;min-height:38px}
+.lc-pan{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;overflow:hidden;touch-action:none;user-select:none;cursor:grab}
+.lc-pan img{width:auto;max-width:95%;max-height:100%;object-fit:contain;transform-origin:center center;will-change:transform;user-select:none;pointer-events:none}
+.lc-lightbox-help{text-align:center;color:#d5e2ee;font-size:.79rem;padding:9px 12px max(13px,env(safe-area-inset-bottom))}
+@media(max-width:640px){
+  .lc-doc-review{padding:10px}
+  .lc-original-preview img{height:235px}
+  .lc-lightbox-bar{padding-top:max(8px,env(safe-area-inset-top))}
+  .lc-lightbox-bar strong{font-size:.85rem}
+  .lc-zoom-actions button{padding:7px 8px}
+}
+
 </style>
 </head>
 <body>
 <header><h1>電商比賽刷題 APP</h1><p>國貿大會考 × 電子商務與跨境電商｜依章節分組，每卷最多 30 題</p><p class="muted" style="font-size:.78rem;margin-top:-12px">版本 2026.10.16｜手機答題版面優化・500 題詳解</p></header>
 <main id="app" aria-live="polite">正在載入完整題庫與章節分組…</main>
-<script src="./app.js?v=20261016-lc-case1-bl46a2" defer></script>
+<script src="./app.js?v=20261016-lc-all-50" defer></script>
 </body></html>

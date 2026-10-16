@@ -26,11 +26,14 @@ jobs:
           node test/check-themes.cjs
           node test/check-mobile-quiz.cjs
           node test/check-lc-case1.cjs
+          node test/check-lc-all.cjs
           node test/check-auto-next.cjs
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp index.html app.js questions.json chapter-groups.json explanations.json lc-case1.json .nojekyll _site/
+          cp index.html app.js questions.json chapter-groups.json explanations.json lc-case1.json lc-all-cases.json .nojekyll _site/
+          mkdir -p _site/assets/lc
+          cp assets/lc/*.jpg _site/assets/lc/
       - uses: actions/configure-pages@v5
         with:
           enablement: true

@@ -12,7 +12,7 @@
   if (!Array.isArray(state.history)) state.history=[];
   state.history=state.history.slice(0,10);
 
-  let questions=[],manifest=null,explanations={},caseOne=null,byId=new Map(),chapters=new Map(),groups=new Map();
+  let questions=[],manifest=null,explanations={},caseOne=null,lcAll=null,byId=new Map(),chapters=new Map(),groups=new Map();
   let paper=[],answers=[],pos=0,wrongOnly=false,context=null,finished=null;
   let currentTheme='home';
   const setTheme=source=>{currentTheme=['trade','ecom','mixed'].includes(source)?source:'home';};
@@ -22,12 +22,113 @@
   function store(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));return true;}catch(e){console.warn('無法儲存進度',e);return false;}}
   function escapeAttr(s){return escapeHTML(s);}
   function button(id,title,secondary=false){return '<button type="button" id="'+escapeAttr(id)+'"'+(secondary?' class="secondary"':'')+'>'+escapeHTML(title)+'</button>';}
+
+  // Examine authentic source-document pictures. Mobile supports two-finger
+  // pinch zoom and drag; desktop supports wheel zoom and drag.
+  function openLcOriginal(id){
+    const doc=lcAll&&Object.values(lcAll.cases).flatMap(c=>c.images).find(d=>d.id===id);
+    if(!doc)return;
+    const overlay=document.createElement('div');
+    overlay.className='lc-lightbox';
+    overlay.setAttribute('role','dialog');
+    overlay.setAttribute('aria-modal','true');
+    overlay.setAttribute('aria-label','原始單據圖片放大檢視');
+    overlay.innerHTML='<div class="lc-lightbox-bar"><strong>'+escapeHTML(doc.title)+'</strong>'+
+      '<div class="lc-zoom-actions"><button type="button" data-zoom="out">−</button>'+
+      '<button type="button" data-zoom="reset">還原</button>'+
+      '<button type="button" data-zoom="in">＋</button>'+
+      '<button type="button" data-zoom="close">關閉 ✕</button></div></div>'+
+      '<div class="lc-pan"><img src="./'+escapeAttr(doc.src)+'" alt="'+escapeAttr(doc.title)+'｜原 PDF 第'+doc.page+'頁" draggable="false"/></div>'+
+      '<div class="lc-lightbox-help">雙指縮放、拖曳查看；電腦可使用滾輪或 ＋／−</div>';
+    document.body.appendChild(overlay);
+    const img=overlay.querySelector('img');
+    const pane=overlay.querySelector('.lc-pan');
+    const pointers=new Map();
+    let scale=1,dx=0,dy=0,pinchDist=null,pinchMid=null;
+    const draw=()=>{img.style.transform='translate('+dx+'px,'+dy+'px) scale('+scale+')';};
+    const reset=()=>{scale=1;dx=dy=0;draw();};
+    const zoom=f=>{scale=Math.max(1,Math.min(6,scale*f));if(scale===1){dx=dy=0;}draw();};
+    const close=()=>{document.removeEventListener('keydown',onKey);overlay.remove();};
+    const onKey=e=>{if(e.key==='Escape')close();};
+    document.addEventListener('keydown',onKey);
+    overlay.querySelectorAll('[data-zoom]').forEach(el=>el.onclick=()=>{
+      if(el.dataset.zoom==='close')close();
+      else if(el.dataset.zoom==='reset')reset();
+      else zoom(el.dataset.zoom==='in'?1.4:1/1.4);
+    });
+    pane.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY<0?1.22:1/1.22);},{passive:false});
+    pane.addEventListener('pointerdown',e=>{
+      e.preventDefault();pane.setPointerCapture?.(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+      if(pointers.size===2){const a=[...pointers.values()];pinchDist=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);pinchMid={x:(a[0].x+a[1].x)/2,y:(a[0].y+a[1].y)/2};}
+    });
+    pane.addEventListener('pointermove',e=>{
+      if(!pointers.has(e.pointerId))return;
+      e.preventDefault();
+      const old=pointers.get(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+      if(pointers.size===1){if(scale>1){dx+=e.clientX-old.x;dy+=e.clientY-old.y;}draw();}
+      else if(pointers.size===2){
+        const p=[...pointers.values()];
+        const nextDist=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);
+        const nextMid={x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2};
+        if(pinchDist&&nextDist){scale=Math.max(1,Math.min(6,scale*(nextDist/pinchDist)));}
+        if(pinchMid){dx+=nextMid.x-pinchMid.x;dy+=nextMid.y-pinchMid.y;}
+        if(scale===1){dx=dy=0;}
+        pinchDist=nextDist;pinchMid=nextMid;draw();
+      }
+    });
+    const release=e=>{pointers.delete(e.pointerId);pinchDist=null;pinchMid=null;};
+    pane.addEventListener('pointerup',release);
+    pane.addEventListener('pointercancel',release);
+    pane.addEventListener('dblclick',e=>{e.preventDefault();scale>1?reset():zoom(2);});
+    overlay.querySelector('[data-zoom="close"]').focus();
+  }
+  function bindLcOriginalImages(){
+    root.querySelectorAll('[data-lc-image]').forEach(el=>el.onclick=()=>openLcOriginal(el.dataset.lcImage));
+  }
+  function renderLcReference(q){
+    const data=lcAll?.cases?.[q.caseId],config=data?.questions?.[q.id];
+    if(!config)return '';
+    const fields=[];
+    if(config.showBill46A&&data.creditBillClause)
+      fields.push({label:'46A｜海運提單完整要求（原文）',text:data.creditBillClause,highlight:true});
+    for(const code of config.fields){
+      // Avoid showing a second copy of the entire 46A B/L requirement.
+      // Other parts of 46A remain relevant to documentary-credit checks.
+      const content=data.creditSections[code];
+      if(!content)continue;
+      fields.push({label:code+'｜信用狀原始條款',text:content});
+    }
+    const renderField=f=>'<div class="lc-ref-field'+(f.highlight?' lc-bill-highlight':'')+'"><strong>'+escapeHTML(f.label)+'</strong>'+
+      '<div class="lc-ref-text">'+escapeHTML(f.text)+'</div></div>';
+    const renderImage=id=>{
+      const d=data.images.find(z=>z.id===id);
+      if(!d)return '';
+      return '<button type="button" class="lc-original-preview" data-lc-image="'+escapeAttr(d.id)+'" aria-label="放大原始'+escapeAttr(d.title)+'圖片">'+
+        '<img src="./'+escapeAttr(d.src)+'" alt="原始題庫第'+d.page+'頁｜'+escapeAttr(d.title)+'" loading="lazy"/>'+
+        '<span>原始'+escapeHTML(d.title)+'　・　點擊放大／雙指縮放</span></button>';
+    };
+    const inlineImages=config.imageMode==='inline'?config.images.map(renderImage).join(''):'';
+    const optionalImages=config.imageMode==='optional'?'<details class="lc-optional-images"><summary>需要辨認欄位位置？查看原始單據圖</summary>'+
+        '<div class="lc-image-grid">'+config.images.map(renderImage).join('')+'</div></details>':'';
+    const creditFull='<details class="lc-original-full"><summary>展開原信用狀相關條款（完整文字）</summary>'+
+      Object.entries(data.creditSections).map(([k,text])=>renderField({label:k,text})).join('')+'</details>';
+    return '<section class="lc-doc-review" aria-label="信用狀案例'+escapeAttr(q.caseNumber)+'原題附件參考">'+
+      '<div class="lc-doc-heading"><strong>案例'+escapeHTML(q.caseNumber)+'｜本題原始參考資料</strong>'+
+      '<small>原 PDF 第 '+data.creditPage+' 頁</small></div>'+
+      '<p class="lc-doc-hint">'+(config.imageMode==='inline'?'本題需要辨認單據空格位置，先看原圖；點擊圖片可縮放。':'本題以原信用狀文字判讀為主。')+
+      ' 以下保留原文，不預先顯示答案。</p>'+
+      (inlineImages?'<div class="lc-image-grid">'+inlineImages+'</div>':'')+
+      '<div class="lc-source-fields">'+fields.map(renderField).join('')+'</div>'+
+      optionalImages+creditFull+'</section>';
+  }
+
   function display(html, quizScreen=false){
     // Only the live question screen hides the global heading on small screens.
     // Every other page restores the heading without touching local score data.
     root.dataset.theme=currentTheme;
     document.body.classList.toggle('quiz-active',quizScreen);
     root.innerHTML=html;
+    bindLcOriginalImages();
     window.scrollTo?.(0,0);
   }
   function summary(ids){
@@ -132,10 +233,13 @@
       '<h2>'+escapeHTML(c.title)+'</h2>'+
       '<p class="muted">本章 '+c.questionCount+' 題，分為 '+c.groupIds.length+' 回；每回最多 30 題、不足照實際題數，題目不跨章也不重複。</p>'+
       metrics(sum)+chapterCaseNotice(c)+(c.id==='T12'&&caseOne?'<div class="case-one-entry"><strong>案例一｜10 題手機審單示範</strong><p>原題第 56–57 頁，附件第 58–60 頁。每題可直接上下滑動閱讀英文條款，並展開四份完整參考資料。</p>'+button('start-case-one','單獨練習案例一（10 題）')+'</div>':'')+
+      (c.id==='T12'&&lcAll?'<div class="lc-all-case-links"><strong>另外四個信用狀案例（各10題）</strong><p class="muted">可獨立練習；每題依需求呈現原文或可縮放的原始單據。</p>'+
+        ['LC02','LC03','LC04','LC05'].map((caseId,i)=>'<button class="secondary" type="button" data-lc-start="'+caseId+'">案例 '+(i+2)+'｜10 題</button>').join('')+'</div>':'')+
       '<div class="chapter-tools">'+button('chapter-wrong','本章錯題練習（'+sum.wrong+' 題）',true)+'</div>'+
       list+draftButton()+note());
     root.querySelector('#back').onclick=()=>showChapters(c.source);
     const caseEntry=root.querySelector('#start-case-one');if(caseEntry)caseEntry.onclick=startCaseOne;
+    root.querySelectorAll('[data-lc-start]').forEach(el=>el.onclick=()=>startLcCase(el.dataset.lcStart));
     root.querySelector('#chapter-wrong').disabled=sum.wrong===0;
     root.querySelector('#chapter-wrong').onclick=()=>startWrongChapter(chapterId);
     root.querySelectorAll('[data-start]').forEach(el=>el.onclick=()=>startGroup(el.dataset.start));
@@ -187,11 +291,14 @@
     state.mode=context.source==='mixed'?'mixed':context.source;
     saveDraft();showQuestion();
   }
+  function startLcCase(caseId){
+    const ids=manifest.chapters.find(c=>c.id==='T12')?.questionIds.filter(id=>byId.get(id)?.caseId===caseId)||[];
+    if(ids.length!==10){alert('此信用狀案例題庫尚未備妥');return;}
+    const n=Number(caseId.slice(-2));
+    beginQuiz(shuffle(ids),{type:'case',source:'trade',chapterId:'T12',display:'信用狀案例 '+n+'｜10 題'},false);
+  }
   function startCaseOne(){
-    if(!caseOne)return;
-    const ids=manifest.chapters.find(c=>c.id==='T12')?.questionIds.filter(id=>byId.get(id)?.caseId==='LC01')||[];
-    if(ids.length!==10){alert('案例一題目資料不完整');return;}
-    beginQuiz(shuffle(ids),{type:'caseOne',source:'trade',chapterId:'T12',display:'信用狀案例一｜10 題'},false);
+    startLcCase('LC01');
   }
   function startGroup(groupId){
     const g=groups.get(groupId);
@@ -246,6 +353,7 @@
   function attachmentNote(q){
     if(!q.contextRequired)return '';
     const pages=(q.referencePages||[]).join('、');
+    if(lcAll?.cases?.[q.caseId])return renderLcReference(q);
     if(q.caseId==='LC01'&&caseOne){
       const fields=caseOne.documents.flatMap(d=>d.fields.map(x=>({...x,document:d.title})));
       const mapping=new Map(fields.map(x=>[x.id,x]));
@@ -431,8 +539,9 @@
     fetch('./questions.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得 questions.json');return r.json();}),
     fetch('./chapter-groups.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得 chapter-groups.json');return r.json();}),
     fetch('./explanations.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得 explanations.json');return r.json();}),
-    fetch('./lc-case1.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得案例一參考資料');return r.json();})
-  ]).then(([qs,data,detail,caseData])=>{
+    fetch('./lc-case1.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得案例一參考資料');return r.json();}),
+    fetch('./lc-all-cases.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得五個信用狀案例附件');return r.json();})
+  ]).then(([qs,data,detail,caseData,allCases])=>{
     questions=qs;manifest=data;validateBank(qs,data);
     if(!detail||Object.keys(detail).length!==qs.length||
       qs.some(q=>!detail[q.id]||typeof detail[q.id].core!=='string'||
@@ -444,8 +553,24 @@
     if(caseData?.caseId!=='LC01'||caseData?.documents?.length!==4||lc1.length!==10||
       lc1.some(q=>!Array.isArray(caseData.questionFields?.[q.id])||
         caseData.questionFields[q.id].some(id=>!fieldIds.has(id))))throw Error('案例一參考資料對應不完整');
+    const validCases=new Set(['LC01','LC02','LC03','LC04','LC05']);
+    const imageIds=new Set();
+    for(const [id,c] of Object.entries(allCases?.cases||{})){
+      if(!validCases.has(id)||!c.creditSections?.['46A']||!c.creditBillClause||!Array.isArray(c.images))throw Error('信用狀附件格式錯誤：'+id);
+      for(const im of c.images){
+        if(imageIds.has(im.id)||!/^assets\/lc\/lc0[1-5]-(draft|invoice|packing|bl)\.jpg$/.test(im.src))throw Error('附件圖檔錯誤');
+        imageIds.add(im.id);
+      }
+    }
+    if(Object.keys(allCases?.cases||{}).length!==5||imageIds.size!==12||
+      qs.filter(q=>q.contextRequired).some(q=>{
+        const c=allCases.cases[q.caseId],config=c?.questions[q.id];
+        return !config||!Array.isArray(config.fields)||!['none','inline','optional'].includes(config.imageMode)||
+          config.images.some(id=>!c.images.find(im=>im.id===id));
+      }))throw Error('50題信用狀資料與原始附件無法完整對應');
     explanations=detail;
     caseOne=caseData;
+    lcAll=allCases;
     home();
   }).catch(e=>{
     console.error(e);

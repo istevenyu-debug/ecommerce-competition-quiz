@@ -29,6 +29,12 @@
 ## 信用狀案例一 10 題專用入口
 國貿第十二章新增單獨的案例一 10 題練習，與既有題庫共用同一組題號及詳解，全部仍為 500 題。案例一原 PDF 第 56–57 頁出題，第 58–60 頁為信用狀、匯票、發票與提單。網站 `lc-case1.json` 保留附件原文及空格，每題預設顯示相關欄位，可向下滑動選答並展開全文文字欄位。原紙本單據空格位置仍請以 PDF 為準。如果本題涉及 Shipping Order（S/O）、提單（B/L）或提單欄位，會將 46A 欄位中要求的完整海運提單英文條款優先顯示在本題參考文字最上方，以便直接上下滑動對照；答案與教師審核提醒仍不會出現在作答頁。案例二至五未修改。
 
+## 信用狀案例一～五：依題型選文字或原始圖像
+
+50 題（5 × 10 題）依原始 PDF 第 56～80 頁逐題設定參考資料：一般信用狀規範題只列原英文信用狀欄位；遇到單據空格、位置或版面題才提供從原始 PDF 裁切的完整匯票、商業發票、包裝單或提單圖。12 張圖保留原始表格與空格、不預填標準答案。部分題目預設顯示圖片，其他題目在「查看原始單據圖」中選看。點選圖片進入深色檢視視窗，支援手機雙指縮放與拖曳、桌面滾輪與縮放按鈕。
+
+涉及 Shipping Order 或 Bill of Lading 的題目，完整顯示原始信用狀 46A 海運提單條款。每個案例另有 10 題專練入口，保留既有題組與 500 題題數、學生 localStorage 成績。新的 `lc-all-cases.json` 只含原始附件內容與每題參考資料對應，沒有正解與教師紅色提醒；原始單據圖在 `assets/lc/`。
+
 ## 手機測驗畫面（2026-10-16）
 
 手機進入「實際作答」頁時，隱藏 APP 網站標題、模式說明、版本等頁首資訊，答題區從畫面頂部開始並放大題目、選項。返回首頁、章節列表、成績與檢討頁時，恢復頁首；電腦版保留頁首。
@@ -48,6 +54,6 @@
 ## 站點發布
 
 GitHub Repository → Settings → Pages → **Build and deployment Source: GitHub Actions**。
-每次 main 有新提交即會觸發 `.github/workflows/pages.yml`，先檢查程式和題庫分組，再發布 `index.html`、`app.js`、`questions.json`、`chapter-groups.json`、`explanations.json`、`lc-case1.json`。
+每次 main 有新提交即會觸發 `.github/workflows/pages.yml`，先檢查程式和題庫分組，再發布 `index.html`、`app.js`、`questions.json`、`chapter-groups.json`、`explanations.json`、`lc-case1.json`、`lc-all-cases.json` 與 `assets/lc/` 原始圖片。
 
 執行 `node test/check-bank.cjs` 可檢查全部 500 題與 22 個題組的分配。

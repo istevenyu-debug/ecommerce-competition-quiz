@@ -23,7 +23,7 @@ const source=fs.readFileSync('app.js','utf8');
 const begin=source.indexOf('  function attachmentNote(q){');
 const end=source.indexOf('  function showQuestion(){',begin);
 assert.ok(begin!==-1&&end>begin);
-const context={caseOne:c,escapeHTML:s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))};
+const context={caseOne:c,lcAll:null,escapeHTML:s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))};
 const note=vm.runInNewContext(source.slice(begin,end)+'; attachmentNote',context);
 const qsById=Object.fromEntries(require('../questions.json').filter(q=>q.caseId==='LC01').map(q=>[q.id,q]));
 const snippets=q=>{
