@@ -96,10 +96,34 @@ body{padding:10px 8px 60px}
 .explanation-content h4{margin:14px 0 6px}
 .explanation-content p{margin:9px 0}
 .memory-tip{background:#e7f4ed;padding:11px 13px;border-radius:9px;color:#17533b}
+
+/* Three soft, distinct theme colors. No explanations/warning styling is altered. */
+.mode-card[data-source="trade"]{background:#edf5ff;border-color:#cedff6}
+.mode-card[data-source="trade"]:hover{background:#e5f0ff;border-color:#a4c4eb}
+.mode-card[data-source="ecom"]{background:#edf9f1;border-color:#cce7d5}
+.mode-card[data-source="ecom"]:hover{background:#e4f5e9;border-color:#a7d5b6}
+.mode-card.mixed{background:#f7f1ff;border-color:#ddcdec}
+.mode-card.mixed:hover{background:#efe6fc;border-color:#c7b0e2}
+#app[data-theme="trade"]{background:#f7fbff;border:1px solid #dae8fa}
+#app[data-theme="ecom"]{background:#f6fcf8;border:1px solid #d7ebdd}
+#app[data-theme="mixed"]{background:#fbf8ff;border:1px solid #e7def4}
+#app[data-theme="trade"] .group-card,#app[data-theme="trade"] .chapter-card{background:#fcfdff;border-color:#d4e3f7}
+#app[data-theme="ecom"] .group-card,#app[data-theme="ecom"] .chapter-card{background:#fcfefc;border-color:#d3e9d9}
+#app[data-theme="mixed"] .group-card,#app[data-theme="mixed"] .chapter-card{background:#fefcff;border-color:#e6dcf2}
+#app[data-theme="trade"] .chip{background:#e4effd;color:#245983}
+#app[data-theme="ecom"] .chip{background:#e2f4e8;color:#245d3a}
+#app[data-theme="mixed"] .chip{background:#efe5fb;color:#614682}
+#app[data-theme="trade"] progress{accent-color:#538dbd}
+#app[data-theme="ecom"] progress{accent-color:#55a87a}
+#app[data-theme="mixed"] progress{accent-color:#9571bd}
+#app[data-theme="ecom"] .option.selected{background:#dff2e7;border-color:#64ad83;outline-color:#b1dfbf}
+#app[data-theme="mixed"] .option.selected{background:#efe4f9;border-color:#a588cf;outline-color:#dbcaef}
+#app[data-theme="trade"] .option.selected{background:#deedfd;border-color:#75a6d0;outline-color:#bdd5ed}
+
 </style>
 </head>
 <body>
-<header><h1>電商比賽刷題 APP</h1><p>國貿大會考 × 電子商務與跨境電商｜依章節分組，每卷最多 30 題</p><p class="muted" style="font-size:.78rem;margin-top:-12px">版本 2026.10.16｜交卷後可展開詳解</p></header>
+<header><h1>電商比賽刷題 APP</h1><p>國貿大會考 × 電子商務與跨境電商｜依章節分組，每卷最多 30 題</p><p class="muted" style="font-size:.78rem;margin-top:-12px">版本 2026.10.16｜三色章節練習・500 題詳解</p></header>
 <main id="app" aria-live="polite">正在載入完整題庫與章節分組…</main>
-<script src="./app.js?v=20261016-student-explanations" defer></script>
+<script src="./app.js?v=20261016-explanations-pastel3" defer></script>
 </body></html>

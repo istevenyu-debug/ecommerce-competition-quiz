@@ -14,13 +14,15 @@
 
   let questions=[],manifest=null,explanations={},byId=new Map(),chapters=new Map(),groups=new Map();
   let paper=[],answers=[],pos=0,wrongOnly=false,context=null,finished=null;
+  let currentTheme='home';
+  const setTheme=source=>{currentTheme=['trade','ecom','mixed'].includes(source)?source:'home';};
 
   const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const shuffle=items=>{const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
   function store(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));return true;}catch(e){console.warn('無法儲存進度',e);return false;}}
   function escapeAttr(s){return escapeHTML(s);}
   function button(id,title,secondary=false){return '<button type="button" id="'+escapeAttr(id)+'"'+(secondary?' class="secondary"':'')+'>'+escapeHTML(title)+'</button>';}
-  function display(html){root.innerHTML=html;window.scrollTo?.(0,0);}
+  function display(html){root.dataset.theme=currentTheme;root.innerHTML=html;window.scrollTo?.(0,0);}
   function summary(ids){
     const total=ids.length,seen=ids.filter(id=>Number(state.seen[id])>0).length,wrong=ids.filter(id=>state.wrong[id]).length;
     return {total,seen,wrong};
@@ -46,6 +48,7 @@
     return '<p class="footnote">正式成績與錯題、完成進度只存在這台裝置的這個瀏覽器。換裝置或清除網站資料可能遺失紀錄；錯題練習不計入近10次成績。</p>';
   }
   function home(){
+    setTheme('home');
     const grand=summary(questions.map(q=>q.id));
     const tiles=manifest.sources.map(src=>{
       const ids=questions.filter(q=>q.source===src.id).map(q=>q.id),s=summary(ids);
@@ -69,6 +72,7 @@
   function showChapters(source){
     const sourceMeta=manifest.sources.find(x=>x.id===source);
     if(!sourceMeta){home();return;}
+    setTheme(source);
     state.mode=source;store();
     const items=manifest.chapters.filter(x=>x.source===source);
     const all=items.flatMap(c=>c.questionIds);
@@ -95,6 +99,7 @@
   function showGroups(chapterId){
     const c=chapters.get(chapterId);
     if(!c){home();return;}
+    setTheme(c.source);
     state.mode=c.source;store();
     const sum=summary(c.questionIds);
     const chapterGroups=c.groupIds.map(id=>groups.get(id)).filter(Boolean);
@@ -134,6 +139,7 @@
     return [...fresh,...practiced].slice(0,count);
   }
   function showMixed(){
+    setTheme('mixed');
     state.mode='mixed';store();
     const trade=eligibleMixed('trade'),ecom=eligibleMixed('ecom');
     const all=[...trade,...ecom],s=summary(all);
@@ -225,6 +231,7 @@
       '<p>目前網頁尚未附完整原始附件圖片；需要對照文件才能作答的題目，請先備妥原始 PDF。</p></details>';
   }
   function showQuestion(){
+    setTheme(context?.source||state.mode);
     const q=paper[pos],checked=answers[pos];
     const questionCount=paper.length,answered=answers.filter(a=>a>=0).length;
     display('<div class="topline"><span class="eyebrow">'+escapeHTML(context?.display||labels[state.mode])+'</span>'+
@@ -260,6 +267,7 @@
     root.querySelector('#pause').onclick=home;
   }
   function finish(){
+    setTheme(context?.source||state.mode);
     let correct=0;
     paper.forEach((q,i)=>{
       state.seen[q.id]=(Number(state.seen[q.id])||0)+1;
@@ -291,6 +299,7 @@
   }
   function review(){
     if(!finished){home();return;}
+    setTheme(context?.source||state.mode);
     display(navigation('← 返回成績')+'<h2>本卷逐題檢討與詳解</h2>'+
       '<p class="muted">先核對作答與標準答案，再點開「查看詳解」閱讀核心觀念、四個選項的解釋及必記重點。解析為教學輔助說明，以題庫標準答案為準。</p>'+
       paper.map((q,i)=>{
@@ -317,6 +326,7 @@
   }
   function showResults(){
     if(!finished){home();return;}
+    setTheme(context?.source||state.mode);
     display('<h2>本卷已完成</h2><p>得分：<strong>'+finished.score+'</strong> 分（'+finished.correct+'/'+finished.total+' 題）</p>'+
       '<div class="actions">'+button('review','再次查看檢討')+button('return','回到題組',true)+'</div>');
     root.querySelector('#review').onclick=review;
@@ -328,6 +338,7 @@
     else home();
   }
   function showHistory(){
+    setTheme('home');
     const rows=state.history.slice(0,10);
     display(navigation('← 首頁')+'<h2>近 10 次練習成績</h2>'+
       (rows.length?

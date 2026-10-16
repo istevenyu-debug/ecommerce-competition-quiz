@@ -23,12 +23,20 @@
 - `questions.json` 包含原題識別碼、題幹、四選項、標準答案、章節與題組資訊。已補齊先前漏轉的 8 題。
 - `chapter-groups.json` 是題組權威定義，每回的 `questionIds` 只包含本章題目，並驗證完整覆蓋且無重複。
 - 國貿第十二章 50 題涉及五組信用狀案例，分為 30 題和 20 題兩回；**網站尚未附上 PDF 的完整單據附件**，請對照原始《國際貿易大會考題庫》第 58–80 頁作答。題目視圖會標明該案例的附件頁碼。
-- 原始資料沒有完整逐選項解析，目前「逐題檢討」提供標準答案及全部選項，並不宣稱有完整詳解。
+- 現已新增 `explanations.json`：500 題學生版解析，逐題含核心觀念、四選項解說、必記重點。交卷後在「逐題檢討」按「查看詳解」展開閱讀；教師審核稿的紅色「待複核」提醒不放進學生畫面。
 - 公開 GitHub Pages 的題目及答案可供訪客檢視，僅供教學與練習使用。
+
+## 三種柔和底色
+
+- 國貿大會考：淡藍色
+- 電子商務與跨境電商：淡綠色
+- 兩者綜合模擬：淡紫色
+
+顏色套用首頁三個分類卡及各自章節、出卷、答題、檢討頁；內容仍使用深色文字，保持對比與可讀性。
 
 ## 站點發布
 
 GitHub Repository → Settings → Pages → **Build and deployment Source: GitHub Actions**。
-每次 main 有新提交即會觸發 `.github/workflows/pages.yml`，先檢查程式和題庫分組，再發布 `index.html`、`app.js`、`questions.json`、`chapter-groups.json`。
+每次 main 有新提交即會觸發 `.github/workflows/pages.yml`，先檢查程式和題庫分組，再發布 `index.html`、`app.js`、`questions.json`、`chapter-groups.json`、`explanations.json`。
 
 執行 `node test/check-bank.cjs` 可檢查全部 500 題與 22 個題組的分配。
