@@ -22,11 +22,12 @@ jobs:
         run: |
           node --check app.js
           node test/check-bank.cjs
+          node test/check-explanations.cjs
           node test/check-auto-next.cjs
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp index.html app.js questions.json chapter-groups.json .nojekyll _site/
+          cp index.html app.js questions.json chapter-groups.json explanations.json .nojekyll _site/
       - uses: actions/configure-pages@v5
         with:
           enablement: true

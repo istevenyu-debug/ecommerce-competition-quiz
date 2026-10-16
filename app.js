@@ -12,7 +12,7 @@
   if (!Array.isArray(state.history)) state.history=[];
   state.history=state.history.slice(0,10);
 
-  let questions=[],manifest=null,byId=new Map(),chapters=new Map(),groups=new Map();
+  let questions=[],manifest=null,explanations={},byId=new Map(),chapters=new Map(),groups=new Map();
   let paper=[],answers=[],pos=0,wrongOnly=false,context=null,finished=null;
 
   const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -291,13 +291,27 @@
   }
   function review(){
     if(!finished){home();return;}
-    display(navigation('← 返回成績')+'<h2>本卷答案檢討</h2>'+
-      '<p class="muted">每題列出作答與題庫正確答案；原始題庫未提供完整逐選項詳解。信用狀題請一併參考案例附表。</p>'+
-      paper.map((q,i)=>'<section class="review '+(answers[i]===q.answer?'correct':'incorrect')+'">'+
-        '<h3>'+(i+1)+'. '+escapeHTML(q.question)+'</h3>'+attachmentNote(q)+
-        '<p>原題：'+escapeHTML(q.id)+'　｜　你的答案：<b>'+('ABCD'[answers[i]]||'—')+'</b>　｜　正解：<b>'+('ABCD'[q.answer]||'—')+'</b></p>'+
-        q.options.map((choice,j)=>'<p class="'+(j===q.answer?'right':'')+'">'+('ABCD'[j])+'. '+escapeHTML(choice)+(j===q.answer?' ✓':'')+'</p>').join('')+
-        '</section>').join('')+'<div class="actions">'+button('return','返回題組／首頁')+'</div>');
+    display(navigation('← 返回成績')+'<h2>本卷逐題檢討與詳解</h2>'+
+      '<p class="muted">先核對作答與標準答案，再點開「查看詳解」閱讀核心觀念、四個選項的解釋及必記重點。解析為教學輔助說明，以題庫標準答案為準。</p>'+
+      paper.map((q,i)=>{
+        const ex=explanations[q.id];
+        const detail=ex
+          ?'<details class="student-explanation"><summary>查看詳解與必記重點</summary>'+
+            '<div class="explanation-content"><p><b>核心觀念：</b>'+escapeHTML(ex.core)+'</p>'+
+            '<h4>四個選項解析</h4>'+
+            ex.choices.map((text,j)=>'<p><b>'+('ABCD'[j])+'：</b>'+escapeHTML(text)+'</p>').join('')+
+            (ex.tip?'<p class="memory-tip"><b>必記重點：</b>'+escapeHTML(ex.tip)+'</p>':'')+
+            '</div></details>'
+          :'<p class="muted">此題目前尚無可顯示的文字詳解。</p>';
+        return '<section class="review '+(answers[i]===q.answer?'correct':'incorrect')+'">'+
+          '<h3>'+(i+1)+'. '+escapeHTML(q.question)+'</h3>'+attachmentNote(q)+
+          '<p>原題：'+escapeHTML(q.id)+'　｜　你的答案：<b>'+('ABCD'[answers[i]]||'—')+
+          '</b>　｜　正解：<b>'+('ABCD'[q.answer]||'—')+'</b></p>'+
+          q.options.map((choice,j)=>'<p class="'+(j===q.answer?'right':'')+'">'+('ABCD'[j])+'. '+
+            escapeHTML(choice)+(j===q.answer?' ✓':'')+'</p>').join('')+
+          detail+'</section>';
+      }).join('')+
+      '<div class="actions">'+button('return','返回題組／首頁')+'</div>');
     root.querySelector('#back').onclick=showResults;
     root.querySelector('#return').onclick=returnFromQuiz;
   }
@@ -360,9 +374,16 @@
 
   Promise.all([
     fetch('./questions.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得 questions.json');return r.json();}),
-    fetch('./chapter-groups.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得 chapter-groups.json');return r.json();})
-  ]).then(([qs,data])=>{
+    fetch('./chapter-groups.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得 chapter-groups.json');return r.json();}),
+    fetch('./explanations.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得 explanations.json');return r.json();})
+  ]).then(([qs,data,detail])=>{
     questions=qs;manifest=data;validateBank(qs,data);
+    if(!detail||Object.keys(detail).length!==qs.length||
+      qs.some(q=>!detail[q.id]||typeof detail[q.id].core!=='string'||
+      !Array.isArray(detail[q.id].choices)||detail[q.id].choices.length!==4)){
+      throw Error('詳解資料與題庫不一致，請重新整理。');
+    }
+    explanations=detail;
     home();
   }).catch(e=>{
     console.error(e);
