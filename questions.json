@@ -7725,8 +7725,8 @@
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 1,
     "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
+    "groupId": "T12-LC01",
+    "groupTitle": "信用狀案例一｜原題10題",
     "groupQuestionNumber": 1
   },
   {
@@ -7755,8 +7755,8 @@
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 2,
     "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
+    "groupId": "T12-LC01",
+    "groupTitle": "信用狀案例一｜原題10題",
     "groupQuestionNumber": 2
   },
   {
@@ -7785,8 +7785,8 @@
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 3,
     "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
+    "groupId": "T12-LC01",
+    "groupTitle": "信用狀案例一｜原題10題",
     "groupQuestionNumber": 3
   },
   {
@@ -7815,8 +7815,8 @@
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 4,
     "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
+    "groupId": "T12-LC01",
+    "groupTitle": "信用狀案例一｜原題10題",
     "groupQuestionNumber": 4
   },
   {
@@ -7845,8 +7845,8 @@
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 5,
     "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
+    "groupId": "T12-LC01",
+    "groupTitle": "信用狀案例一｜原題10題",
     "groupQuestionNumber": 5
   },
   {
@@ -7875,8 +7875,8 @@
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 6,
     "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
+    "groupId": "T12-LC01",
+    "groupTitle": "信用狀案例一｜原題10題",
     "groupQuestionNumber": 6
   },
   {
@@ -7905,8 +7905,8 @@
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 7,
     "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
+    "groupId": "T12-LC01",
+    "groupTitle": "信用狀案例一｜原題10題",
     "groupQuestionNumber": 7
   },
   {
@@ -7935,8 +7935,8 @@
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 8,
     "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
+    "groupId": "T12-LC01",
+    "groupTitle": "信用狀案例一｜原題10題",
     "groupQuestionNumber": 8
   },
   {
@@ -7965,8 +7965,8 @@
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 9,
     "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
+    "groupId": "T12-LC01",
+    "groupTitle": "信用狀案例一｜原題10題",
     "groupQuestionNumber": 9
   },
   {
@@ -7995,8 +7995,8 @@
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 10,
     "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
+    "groupId": "T12-LC01",
+    "groupTitle": "信用狀案例一｜原題10題",
     "groupQuestionNumber": 10
   },
   {
@@ -8024,10 +8024,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 11,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 11
+    "groupNumber": 2,
+    "groupId": "T12-LC02",
+    "groupTitle": "信用狀案例二｜原題10題",
+    "groupQuestionNumber": 1
   },
   {
     "id": "T61-2",
@@ -8054,10 +8054,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 12,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 12
+    "groupNumber": 2,
+    "groupId": "T12-LC02",
+    "groupTitle": "信用狀案例二｜原題10題",
+    "groupQuestionNumber": 2
   },
   {
     "id": "T61-3",
@@ -8084,10 +8084,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 13,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 13
+    "groupNumber": 2,
+    "groupId": "T12-LC02",
+    "groupTitle": "信用狀案例二｜原題10題",
+    "groupQuestionNumber": 3
   },
   {
     "id": "T61-4",
@@ -8114,10 +8114,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 14,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 14
+    "groupNumber": 2,
+    "groupId": "T12-LC02",
+    "groupTitle": "信用狀案例二｜原題10題",
+    "groupQuestionNumber": 4
   },
   {
     "id": "T61-5",
@@ -8144,10 +8144,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 15,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 15
+    "groupNumber": 2,
+    "groupId": "T12-LC02",
+    "groupTitle": "信用狀案例二｜原題10題",
+    "groupQuestionNumber": 5
   },
   {
     "id": "T61-6",
@@ -8174,10 +8174,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 16,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 16
+    "groupNumber": 2,
+    "groupId": "T12-LC02",
+    "groupTitle": "信用狀案例二｜原題10題",
+    "groupQuestionNumber": 6
   },
   {
     "id": "T61-7",
@@ -8204,10 +8204,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 17,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 17
+    "groupNumber": 2,
+    "groupId": "T12-LC02",
+    "groupTitle": "信用狀案例二｜原題10題",
+    "groupQuestionNumber": 7
   },
   {
     "id": "T62-8",
@@ -8234,10 +8234,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 18,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 18
+    "groupNumber": 2,
+    "groupId": "T12-LC02",
+    "groupTitle": "信用狀案例二｜原題10題",
+    "groupQuestionNumber": 8
   },
   {
     "id": "T62-9",
@@ -8264,10 +8264,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 19,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 19
+    "groupNumber": 2,
+    "groupId": "T12-LC02",
+    "groupTitle": "信用狀案例二｜原題10題",
+    "groupQuestionNumber": 9
   },
   {
     "id": "T62-10",
@@ -8294,10 +8294,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 20,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 20
+    "groupNumber": 2,
+    "groupId": "T12-LC02",
+    "groupTitle": "信用狀案例二｜原題10題",
+    "groupQuestionNumber": 10
   },
   {
     "id": "T66-1",
@@ -8324,10 +8324,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 21,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 21
+    "groupNumber": 3,
+    "groupId": "T12-LC03",
+    "groupTitle": "信用狀案例三｜原題10題",
+    "groupQuestionNumber": 1
   },
   {
     "id": "T66-2",
@@ -8354,10 +8354,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 22,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 22
+    "groupNumber": 3,
+    "groupId": "T12-LC03",
+    "groupTitle": "信用狀案例三｜原題10題",
+    "groupQuestionNumber": 2
   },
   {
     "id": "T66-3",
@@ -8384,10 +8384,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 23,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 23
+    "groupNumber": 3,
+    "groupId": "T12-LC03",
+    "groupTitle": "信用狀案例三｜原題10題",
+    "groupQuestionNumber": 3
   },
   {
     "id": "T66-4",
@@ -8414,10 +8414,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 24,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 24
+    "groupNumber": 3,
+    "groupId": "T12-LC03",
+    "groupTitle": "信用狀案例三｜原題10題",
+    "groupQuestionNumber": 4
   },
   {
     "id": "T66-5",
@@ -8444,10 +8444,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 25,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 25
+    "groupNumber": 3,
+    "groupId": "T12-LC03",
+    "groupTitle": "信用狀案例三｜原題10題",
+    "groupQuestionNumber": 5
   },
   {
     "id": "T66-6",
@@ -8474,10 +8474,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 26,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 26
+    "groupNumber": 3,
+    "groupId": "T12-LC03",
+    "groupTitle": "信用狀案例三｜原題10題",
+    "groupQuestionNumber": 6
   },
   {
     "id": "T66-7",
@@ -8504,10 +8504,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 27,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 27
+    "groupNumber": 3,
+    "groupId": "T12-LC03",
+    "groupTitle": "信用狀案例三｜原題10題",
+    "groupQuestionNumber": 7
   },
   {
     "id": "T67-8",
@@ -8534,10 +8534,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 28,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 28
+    "groupNumber": 3,
+    "groupId": "T12-LC03",
+    "groupTitle": "信用狀案例三｜原題10題",
+    "groupQuestionNumber": 8
   },
   {
     "id": "T67-9",
@@ -8564,10 +8564,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 29,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 29
+    "groupNumber": 3,
+    "groupId": "T12-LC03",
+    "groupTitle": "信用狀案例三｜原題10題",
+    "groupQuestionNumber": 9
   },
   {
     "id": "T67-10",
@@ -8594,10 +8594,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 30,
-    "groupNumber": 1,
-    "groupId": "T12-R1",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第1回",
-    "groupQuestionNumber": 30
+    "groupNumber": 3,
+    "groupId": "T12-LC03",
+    "groupTitle": "信用狀案例三｜原題10題",
+    "groupQuestionNumber": 10
   },
   {
     "id": "T71-1",
@@ -8624,9 +8624,9 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 31,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
+    "groupNumber": 4,
+    "groupId": "T12-LC04",
+    "groupTitle": "信用狀案例四｜原題10題",
     "groupQuestionNumber": 1
   },
   {
@@ -8654,9 +8654,9 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 32,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
+    "groupNumber": 4,
+    "groupId": "T12-LC04",
+    "groupTitle": "信用狀案例四｜原題10題",
     "groupQuestionNumber": 2
   },
   {
@@ -8684,9 +8684,9 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 33,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
+    "groupNumber": 4,
+    "groupId": "T12-LC04",
+    "groupTitle": "信用狀案例四｜原題10題",
     "groupQuestionNumber": 3
   },
   {
@@ -8714,9 +8714,9 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 34,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
+    "groupNumber": 4,
+    "groupId": "T12-LC04",
+    "groupTitle": "信用狀案例四｜原題10題",
     "groupQuestionNumber": 4
   },
   {
@@ -8744,9 +8744,9 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 35,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
+    "groupNumber": 4,
+    "groupId": "T12-LC04",
+    "groupTitle": "信用狀案例四｜原題10題",
     "groupQuestionNumber": 5
   },
   {
@@ -8774,9 +8774,9 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 36,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
+    "groupNumber": 4,
+    "groupId": "T12-LC04",
+    "groupTitle": "信用狀案例四｜原題10題",
     "groupQuestionNumber": 6
   },
   {
@@ -8804,9 +8804,9 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 37,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
+    "groupNumber": 4,
+    "groupId": "T12-LC04",
+    "groupTitle": "信用狀案例四｜原題10題",
     "groupQuestionNumber": 7
   },
   {
@@ -8834,9 +8834,9 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 38,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
+    "groupNumber": 4,
+    "groupId": "T12-LC04",
+    "groupTitle": "信用狀案例四｜原題10題",
     "groupQuestionNumber": 8
   },
   {
@@ -8864,9 +8864,9 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 39,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
+    "groupNumber": 4,
+    "groupId": "T12-LC04",
+    "groupTitle": "信用狀案例四｜原題10題",
     "groupQuestionNumber": 9
   },
   {
@@ -8894,9 +8894,9 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 40,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
+    "groupNumber": 4,
+    "groupId": "T12-LC04",
+    "groupTitle": "信用狀案例四｜原題10題",
     "groupQuestionNumber": 10
   },
   {
@@ -8924,10 +8924,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 41,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
-    "groupQuestionNumber": 11
+    "groupNumber": 5,
+    "groupId": "T12-LC05",
+    "groupTitle": "信用狀案例五｜原題10題",
+    "groupQuestionNumber": 1
   },
   {
     "id": "T76-2",
@@ -8954,10 +8954,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 42,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
-    "groupQuestionNumber": 12
+    "groupNumber": 5,
+    "groupId": "T12-LC05",
+    "groupTitle": "信用狀案例五｜原題10題",
+    "groupQuestionNumber": 2
   },
   {
     "id": "T76-3",
@@ -8984,10 +8984,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 43,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
-    "groupQuestionNumber": 13
+    "groupNumber": 5,
+    "groupId": "T12-LC05",
+    "groupTitle": "信用狀案例五｜原題10題",
+    "groupQuestionNumber": 3
   },
   {
     "id": "T76-4",
@@ -9014,10 +9014,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 44,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
-    "groupQuestionNumber": 14
+    "groupNumber": 5,
+    "groupId": "T12-LC05",
+    "groupTitle": "信用狀案例五｜原題10題",
+    "groupQuestionNumber": 4
   },
   {
     "id": "T76-5",
@@ -9044,10 +9044,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 45,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
-    "groupQuestionNumber": 15
+    "groupNumber": 5,
+    "groupId": "T12-LC05",
+    "groupTitle": "信用狀案例五｜原題10題",
+    "groupQuestionNumber": 5
   },
   {
     "id": "T76-6",
@@ -9074,10 +9074,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 46,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
-    "groupQuestionNumber": 16
+    "groupNumber": 5,
+    "groupId": "T12-LC05",
+    "groupTitle": "信用狀案例五｜原題10題",
+    "groupQuestionNumber": 6
   },
   {
     "id": "T76-7",
@@ -9104,10 +9104,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 47,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
-    "groupQuestionNumber": 17
+    "groupNumber": 5,
+    "groupId": "T12-LC05",
+    "groupTitle": "信用狀案例五｜原題10題",
+    "groupQuestionNumber": 7
   },
   {
     "id": "T77-8",
@@ -9134,10 +9134,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 48,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
-    "groupQuestionNumber": 18
+    "groupNumber": 5,
+    "groupId": "T12-LC05",
+    "groupTitle": "信用狀案例五｜原題10題",
+    "groupQuestionNumber": 8
   },
   {
     "id": "T77-9",
@@ -9164,10 +9164,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 49,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
-    "groupQuestionNumber": 19
+    "groupNumber": 5,
+    "groupId": "T12-LC05",
+    "groupTitle": "信用狀案例五｜原題10題",
+    "groupQuestionNumber": 9
   },
   {
     "id": "T77-10",
@@ -9194,10 +9194,10 @@
     "chapterId": "T12",
     "chapterTitle": "十二、信用狀實例分析及單證填製",
     "chapterQuestionNumber": 50,
-    "groupNumber": 2,
-    "groupId": "T12-R2",
-    "groupTitle": "十二、信用狀實例分析及單證填製｜第2回",
-    "groupQuestionNumber": 20
+    "groupNumber": 5,
+    "groupId": "T12-LC05",
+    "groupTitle": "信用狀案例五｜原題10題",
+    "groupQuestionNumber": 10
   },
   {
     "id": "E001",

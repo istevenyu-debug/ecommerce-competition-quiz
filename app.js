@@ -208,8 +208,8 @@
   }
   function chapterCaseNotice(c){
     if(c.id!=='T12')return '';
-    return '<div class="case-warning"><strong>信用狀案例題提醒</strong><p>本章共 5 個案例、50 題；每個案例 10 題。題目涉及信用狀及附表中的發票、提單或匯票，'+
-      '網站尚未收錄完整單據附件。開始練習前請備妥原始國貿大會考 PDF 第 58–80 頁，避免無法判讀。</p></div>';
+    return '<div class="case-warning"><strong>信用狀五個案例，各10題</strong>'+
+      '<p>依原題庫案例一至五分組，總計50題。各題會顯示信用狀條款或需要放大的原始單據；可直接依案例選擇練習。</p></div>';
   }
   function showGroups(chapterId){
     const c=chapters.get(chapterId);
@@ -218,29 +218,31 @@
     state.mode=c.source;store();
     const sum=summary(c.questionIds);
     const chapterGroups=c.groupIds.map(id=>groups.get(id)).filter(Boolean);
+    const chinese=["一","二","三","四","五"];
+    const isLC=c.id==='T12';
     const list=chapterGroups.map(g=>{
       const s=summary(g.questionIds);
       const numbers=g.questionIds.map(id=>byId.get(id)?.chapterQuestionNumber).filter(Number.isInteger);
       const from=Math.min(...numbers),to=Math.max(...numbers);
-      return '<div class="group-card"><div class="group-heading"><strong>第 '+g.round+' 回</strong><span class="chip">'+g.questionCount+' 題</span></div>'+
-        '<p class="muted">本章原題 '+from+'–'+to+' 題'+(g.requiresContext?' · 需案例附件':'')+'</p>'+
+      const caseName=g.caseId?'案例'+chinese[g.caseNumber-1]:'第 '+g.round+' 回';
+      const range=g.caseId
+        ?'原題第 '+(g.questionPages||[]).join('、')+' 頁 · 附件 '+(g.referencePages||[]).join('、')+' 頁'
+        :'本章原題 '+from+'–'+to+' 題'+(g.requiresContext?' · 需案例附件':'');
+      return '<div class="group-card"><div class="group-heading"><strong>'+escapeHTML(caseName)+'</strong>'+
+        '<span class="chip">'+g.questionCount+' 題</span></div>'+
+        '<p class="muted">'+escapeHTML(range)+'</p>'+
         '<p class="group-progress">已刷 '+s.seen+'/'+s.total+' 題　｜　錯題 '+s.wrong+' 題</p>'+
-        '<progress aria-label="第'+g.round+'回完成進度" value="'+s.seen+'" max="'+s.total+'"></progress>'+
-        '<div class="actions"><button type="button" data-start="'+escapeAttr(g.id)+'">開始第 '+g.round+' 回（'+g.questionCount+' 題）</button>'+
-        '<button type="button" class="secondary" data-wronggroup="'+escapeAttr(g.id)+'"'+(s.wrong===0?' disabled':'')+'>本回錯題 ('+s.wrong+')</button></div></div>';
+        '<progress aria-label="'+escapeAttr(caseName)+'完成進度" value="'+s.seen+'" max="'+s.total+'"></progress>'+
+        '<div class="actions"><button type="button" data-start="'+escapeAttr(g.id)+'">開始'+escapeHTML(caseName)+'（'+g.questionCount+' 題）</button>'+
+        '<button type="button" class="secondary" data-wronggroup="'+escapeAttr(g.id)+'"'+(s.wrong===0?' disabled':'')+'>'+escapeHTML(caseName)+'錯題 ('+s.wrong+')</button></div></div>';
     }).join('');
-    display(navigation('← 返回章節')+
-      '<p class="eyebrow">'+escapeHTML(labels[c.source])+'</p>'+
+    display(navigation('← 返回章節')+'<p class="eyebrow">'+escapeHTML(labels[c.source])+'</p>'+
       '<h2>'+escapeHTML(c.title)+'</h2>'+
-      '<p class="muted">本章 '+c.questionCount+' 題，分為 '+c.groupIds.length+' 回；每回最多 30 題、不足照實際題數，題目不跨章也不重複。</p>'+
-      metrics(sum)+chapterCaseNotice(c)+(c.id==='T12'&&caseOne?'<div class="case-one-entry"><strong>案例一｜10 題手機審單示範</strong><p>原題第 56–57 頁，附件第 58–60 頁。每題可直接上下滑動閱讀英文條款，並展開四份完整參考資料。</p>'+button('start-case-one','單獨練習案例一（10 題）')+'</div>':'')+
-      (c.id==='T12'&&lcAll?'<div class="lc-all-case-links"><strong>另外四個信用狀案例（各10題）</strong><p class="muted">可獨立練習；每題依需求呈現原文或可縮放的原始單據。</p>'+
-        ['LC02','LC03','LC04','LC05'].map((caseId,i)=>'<button class="secondary" type="button" data-lc-start="'+caseId+'">案例 '+(i+2)+'｜10 題</button>').join('')+'</div>':'')+
+      '<p class="muted">'+(isLC?'本章共5個原始信用狀案例，每案固定10題；案例之間不混題。':'本章 '+c.questionCount+' 題，分為 '+c.groupIds.length+' 回；每回最多30題，不與其他章混題。')+'</p>'+
+      metrics(sum)+chapterCaseNotice(c)+
       '<div class="chapter-tools">'+button('chapter-wrong','本章錯題練習（'+sum.wrong+' 題）',true)+'</div>'+
       list+draftButton()+note());
     root.querySelector('#back').onclick=()=>showChapters(c.source);
-    const caseEntry=root.querySelector('#start-case-one');if(caseEntry)caseEntry.onclick=startCaseOne;
-    root.querySelectorAll('[data-lc-start]').forEach(el=>el.onclick=()=>startLcCase(el.dataset.lcStart));
     root.querySelector('#chapter-wrong').disabled=sum.wrong===0;
     root.querySelector('#chapter-wrong').onclick=()=>startWrongChapter(chapterId);
     root.querySelectorAll('[data-start]').forEach(el=>el.onclick=()=>startGroup(el.dataset.start));
@@ -304,7 +306,7 @@
   function startGroup(groupId){
     const g=groups.get(groupId);
     if(!g)return;
-    beginQuiz(shuffle(g.questionIds),{type:'group',source:g.source,chapterId:g.chapterId,groupId:g.id,display:g.label},false);
+    beginQuiz(g.caseId?[...g.questionIds]:shuffle(g.questionIds),{type:'group',source:g.source,chapterId:g.chapterId,groupId:g.id,display:g.label},false);
   }
   function startWrongGroup(groupId){
     const g=groups.get(groupId);if(!g)return;
@@ -509,7 +511,7 @@
 
   function validateBank(qs,data){
     if(!Array.isArray(qs)||!data||!Array.isArray(data.chapters)||!Array.isArray(data.groups))throw Error('題庫或章節分組格式錯誤');
-    if(qs.length!==500||data.chapters.length!==14||data.groups.length!==22)throw Error('題庫數量與章節規劃不一致');
+    if(qs.length!==500||data.chapters.length!==14||data.groups.length!==25)throw Error('題庫數量與章節規劃不一致');
     const ids=new Set();
     for(const q of qs){
       if(!q.id||ids.has(q.id)||!q.question||q.options?.length!==4||![0,1,2,3].includes(q.answer))throw Error('題庫題號或選項格式錯誤：'+(q.id||'?'));

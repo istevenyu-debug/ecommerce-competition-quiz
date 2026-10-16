@@ -7,7 +7,7 @@ assert.equal(questions.length,500);
 assert.equal(questions.filter(q=>q.source==='trade').length,400);
 assert.equal(questions.filter(q=>q.source==='ecom').length,100);
 assert.equal(manifest.chapters.length,14);
-assert.equal(manifest.groups.length,22);
+assert.equal(manifest.groups.length,25);
 const map=new Map(questions.map(q=>[q.id,q]));
 assert.equal(map.size,500,'duplicate question IDs');
 const seenIds=[];
@@ -32,7 +32,7 @@ for(const c of manifest.chapters){
  assert.equal(new Set(c.questionIds).size,c.questionCount);
  assert.deepEqual([...new Set(g.flatMap(x=>x.questionIds))].sort(),[...c.questionIds].sort());
 }
-for(const [id,size] of Object.entries({'T04-R1':20,'T05-R2':10,'T06-R2':10,'T10-R1':15,'T11-R2':25,'T12-R1':30,'T12-R2':20,'E01-R2':15,'E02-R1':20,'E03-R2':5})){
+for(const [id,size] of Object.entries({'T04-R1':20,'T05-R2':10,'T06-R2':10,'T10-R1':15,'T11-R2':25,'T12-LC01':10,'T12-LC02':10,'T12-LC03':10,'T12-LC04':10,'T12-LC05':10,'E01-R2':15,'E02-R1':20,'E03-R2':5})){
  assert.equal(manifest.groups.find(g=>g.id===id)?.questionCount,size,id);
 }
 const cases=questions.filter(q=>q.contextRequired);
@@ -43,4 +43,12 @@ for(const q of questions){
  assert.ok([0,1,2,3].includes(q.answer));
  assert.ok(q.question&&q.chapterId&&q.groupId);
 }
-console.log('PASS: 500 questions / 14 chapters / 22 nonoverlapping groups, each <= 30.');
+const five=manifest.groups.filter(g=>g.chapterId==='T12');
+assert.deepEqual(five.map(g=>g.caseId),['LC01','LC02','LC03','LC04','LC05']);
+assert.deepEqual(five.map(g=>g.questionCount),[10,10,10,10,10]);
+for(const g of five){
+  assert.equal(new Set(g.questionIds.map(id=>map.get(id).caseId)).size,1);
+  assert.equal(map.get(g.questionIds[0]).caseId,g.caseId);
+  assert.deepEqual(g.questionIds.map(id=>map.get(id).groupQuestionNumber),[1,2,3,4,5,6,7,8,9,10]);
+}
+console.log('PASS: 500 questions / 14 chapters / 25 non-overlapping groups, with five distinct original 10-question LC cases.');

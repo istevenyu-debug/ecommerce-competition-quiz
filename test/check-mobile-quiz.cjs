@@ -7,7 +7,7 @@ const bank=JSON.parse(fs.readFileSync('questions.json','utf8'));
 const groups=JSON.parse(fs.readFileSync('chapter-groups.json','utf8'));
 assert.equal(bank.length,500);
 assert.equal(groups.chapters.length,14);
-assert.equal(groups.groups.length,22);
+assert.equal(groups.groups.length,25);
 assert.ok(app.includes('document.body.classList.toggle(\'quiz-active\',quizScreen)'), 'quiz class should track active screen');
 assert.ok(app.includes("'<div class=\"actions\">'+button('pause','暫存並回首頁',true)+'</div>',true);"), 'question renderer must enable compact mode');
 assert.ok(html.includes('body.quiz-active > header{display:none!important}'),'site banner should hide in mobile quiz');

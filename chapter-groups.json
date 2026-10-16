@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "questionCount": 500,
-  "splitRule": "每章固定每回最多30題；每回題號不重複；不足30題使用實際題數。練完可重練、題序可洗牌。",
+  "splitRule": "一般章節每回最多30題、不重複；第十二章遵循原題庫案例一～五，各案固定10題。",
   "sources": [
     {
       "id": "trade",
       "title": "國貿大會考",
       "questionCount": 400,
       "chapterCount": 11,
-      "groupCount": 17
+      "groupCount": 20
     },
     {
       "id": "ecom",
@@ -490,8 +490,11 @@
       "title": "十二、信用狀實例分析及單證填製",
       "questionCount": 50,
       "groupIds": [
-        "T12-R1",
-        "T12-R2"
+        "T12-LC01",
+        "T12-LC02",
+        "T12-LC03",
+        "T12-LC04",
+        "T12-LC05"
       ],
       "questionIds": [
         "T56-1",
@@ -552,7 +555,7 @@
         "LC04",
         "LC05"
       ],
-      "note": "此章50題需要各案例相應信用狀及單據附表，依三個案例30題＋兩個案例20題分卷。"
+      "note": "依原始題庫分為五個獨立信用狀案例，每個案例固定10題；原題與所需附件可對應作答。"
     },
     {
       "id": "E01",
@@ -1222,108 +1225,6 @@
       "requiresContext": false
     },
     {
-      "id": "T12-R1",
-      "source": "trade",
-      "chapterId": "T12",
-      "title": "十二、信用狀實例分析及單證填製",
-      "round": 1,
-      "label": "十二、信用狀實例分析及單證填製｜第1回",
-      "questionCount": 30,
-      "questionIds": [
-        "T56-1",
-        "T56-2",
-        "T56-3",
-        "T56-4",
-        "T56-5",
-        "T56-6",
-        "T56-7",
-        "T56-8",
-        "T57-9",
-        "T57-10",
-        "T61-1",
-        "T61-2",
-        "T61-3",
-        "T61-4",
-        "T61-5",
-        "T61-6",
-        "T61-7",
-        "T62-8",
-        "T62-9",
-        "T62-10",
-        "T66-1",
-        "T66-2",
-        "T66-3",
-        "T66-4",
-        "T66-5",
-        "T66-6",
-        "T66-7",
-        "T67-8",
-        "T67-9",
-        "T67-10"
-      ],
-      "requiresContext": true,
-      "caseIds": [
-        "LC01",
-        "LC02",
-        "LC03"
-      ],
-      "referencePages": [
-        58,
-        59,
-        60,
-        63,
-        64,
-        65,
-        68,
-        69,
-        70
-      ]
-    },
-    {
-      "id": "T12-R2",
-      "source": "trade",
-      "chapterId": "T12",
-      "title": "十二、信用狀實例分析及單證填製",
-      "round": 2,
-      "label": "十二、信用狀實例分析及單證填製｜第2回",
-      "questionCount": 20,
-      "questionIds": [
-        "T71-1",
-        "T71-2",
-        "T71-3",
-        "T71-4",
-        "T71-5",
-        "T71-6",
-        "T71-7",
-        "T72-8",
-        "T72-9",
-        "T72-10",
-        "T76-1",
-        "T76-2",
-        "T76-3",
-        "T76-4",
-        "T76-5",
-        "T76-6",
-        "T76-7",
-        "T77-8",
-        "T77-9",
-        "T77-10"
-      ],
-      "requiresContext": true,
-      "caseIds": [
-        "LC04",
-        "LC05"
-      ],
-      "referencePages": [
-        73,
-        74,
-        75,
-        78,
-        79,
-        80
-      ]
-    },
-    {
       "id": "E01-R1",
       "source": "ecom",
       "chapterId": "E01",
@@ -1482,6 +1383,186 @@
         "E100"
       ],
       "requiresContext": false
+    },
+    {
+      "id": "T12-LC01",
+      "source": "trade",
+      "chapterId": "T12",
+      "title": "十二、信用狀實例分析及單證填製",
+      "round": 1,
+      "caseId": "LC01",
+      "caseNumber": 1,
+      "label": "信用狀案例一｜原題10題",
+      "questionCount": 10,
+      "questionIds": [
+        "T56-1",
+        "T56-2",
+        "T56-3",
+        "T56-4",
+        "T56-5",
+        "T56-6",
+        "T56-7",
+        "T56-8",
+        "T57-9",
+        "T57-10"
+      ],
+      "requiresContext": true,
+      "caseIds": [
+        "LC01"
+      ],
+      "questionPages": [
+        56,
+        57
+      ],
+      "referencePages": [
+        58,
+        59,
+        60
+      ]
+    },
+    {
+      "id": "T12-LC02",
+      "source": "trade",
+      "chapterId": "T12",
+      "title": "十二、信用狀實例分析及單證填製",
+      "round": 2,
+      "caseId": "LC02",
+      "caseNumber": 2,
+      "label": "信用狀案例二｜原題10題",
+      "questionCount": 10,
+      "questionIds": [
+        "T61-1",
+        "T61-2",
+        "T61-3",
+        "T61-4",
+        "T61-5",
+        "T61-6",
+        "T61-7",
+        "T62-8",
+        "T62-9",
+        "T62-10"
+      ],
+      "requiresContext": true,
+      "caseIds": [
+        "LC02"
+      ],
+      "questionPages": [
+        61,
+        62
+      ],
+      "referencePages": [
+        63,
+        64,
+        65
+      ]
+    },
+    {
+      "id": "T12-LC03",
+      "source": "trade",
+      "chapterId": "T12",
+      "title": "十二、信用狀實例分析及單證填製",
+      "round": 3,
+      "caseId": "LC03",
+      "caseNumber": 3,
+      "label": "信用狀案例三｜原題10題",
+      "questionCount": 10,
+      "questionIds": [
+        "T66-1",
+        "T66-2",
+        "T66-3",
+        "T66-4",
+        "T66-5",
+        "T66-6",
+        "T66-7",
+        "T67-8",
+        "T67-9",
+        "T67-10"
+      ],
+      "requiresContext": true,
+      "caseIds": [
+        "LC03"
+      ],
+      "questionPages": [
+        66,
+        67
+      ],
+      "referencePages": [
+        68,
+        69,
+        70
+      ]
+    },
+    {
+      "id": "T12-LC04",
+      "source": "trade",
+      "chapterId": "T12",
+      "title": "十二、信用狀實例分析及單證填製",
+      "round": 4,
+      "caseId": "LC04",
+      "caseNumber": 4,
+      "label": "信用狀案例四｜原題10題",
+      "questionCount": 10,
+      "questionIds": [
+        "T71-1",
+        "T71-2",
+        "T71-3",
+        "T71-4",
+        "T71-5",
+        "T71-6",
+        "T71-7",
+        "T72-8",
+        "T72-9",
+        "T72-10"
+      ],
+      "requiresContext": true,
+      "caseIds": [
+        "LC04"
+      ],
+      "questionPages": [
+        71,
+        72
+      ],
+      "referencePages": [
+        73,
+        74,
+        75
+      ]
+    },
+    {
+      "id": "T12-LC05",
+      "source": "trade",
+      "chapterId": "T12",
+      "title": "十二、信用狀實例分析及單證填製",
+      "round": 5,
+      "caseId": "LC05",
+      "caseNumber": 5,
+      "label": "信用狀案例五｜原題10題",
+      "questionCount": 10,
+      "questionIds": [
+        "T76-1",
+        "T76-2",
+        "T76-3",
+        "T76-4",
+        "T76-5",
+        "T76-6",
+        "T76-7",
+        "T77-8",
+        "T77-9",
+        "T77-10"
+      ],
+      "requiresContext": true,
+      "caseIds": [
+        "LC05"
+      ],
+      "questionPages": [
+        76,
+        77
+      ],
+      "referencePages": [
+        78,
+        79,
+        80
+      ]
     }
   ],
   "cases": [
