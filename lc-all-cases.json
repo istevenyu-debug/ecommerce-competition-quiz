@@ -574,7 +574,9 @@
           "fields": [
             "31C",
             "46A",
-            "47A"
+            "47A",
+            "48",
+            "31D"
           ],
           "imageMode": "optional",
           "images": [
