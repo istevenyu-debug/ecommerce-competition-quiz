@@ -12,7 +12,7 @@
   if (!Array.isArray(state.history)) state.history=[];
   state.history=state.history.slice(0,10);
 
-  let questions=[],manifest=null,explanations={},byId=new Map(),chapters=new Map(),groups=new Map();
+  let questions=[],manifest=null,explanations={},caseOne=null,byId=new Map(),chapters=new Map(),groups=new Map();
   let paper=[],answers=[],pos=0,wrongOnly=false,context=null,finished=null;
   let currentTheme='home';
   const setTheme=source=>{currentTheme=['trade','ecom','mixed'].includes(source)?source:'home';};
@@ -131,10 +131,11 @@
       '<p class="eyebrow">'+escapeHTML(labels[c.source])+'</p>'+
       '<h2>'+escapeHTML(c.title)+'</h2>'+
       '<p class="muted">本章 '+c.questionCount+' 題，分為 '+c.groupIds.length+' 回；每回最多 30 題、不足照實際題數，題目不跨章也不重複。</p>'+
-      metrics(sum)+chapterCaseNotice(c)+
+      metrics(sum)+chapterCaseNotice(c)+(c.id==='T12'&&caseOne?'<div class="case-one-entry"><strong>案例一｜10 題手機審單示範</strong><p>原題第 56–57 頁，附件第 58–60 頁。每題可直接上下滑動閱讀英文條款，並展開四份完整參考資料。</p>'+button('start-case-one','單獨練習案例一（10 題）')+'</div>':'')+
       '<div class="chapter-tools">'+button('chapter-wrong','本章錯題練習（'+sum.wrong+' 題）',true)+'</div>'+
       list+draftButton()+note());
     root.querySelector('#back').onclick=()=>showChapters(c.source);
+    const caseEntry=root.querySelector('#start-case-one');if(caseEntry)caseEntry.onclick=startCaseOne;
     root.querySelector('#chapter-wrong').disabled=sum.wrong===0;
     root.querySelector('#chapter-wrong').onclick=()=>startWrongChapter(chapterId);
     root.querySelectorAll('[data-start]').forEach(el=>el.onclick=()=>startGroup(el.dataset.start));
@@ -185,6 +186,12 @@
     paper=chosen;answers=Array(paper.length).fill(-1);pos=0;context=quizContext;wrongOnly=isWrong;finished=null;
     state.mode=context.source==='mixed'?'mixed':context.source;
     saveDraft();showQuestion();
+  }
+  function startCaseOne(){
+    if(!caseOne)return;
+    const ids=manifest.chapters.find(c=>c.id==='T12')?.questionIds.filter(id=>byId.get(id)?.caseId==='LC01')||[];
+    if(ids.length!==10){alert('案例一題目資料不完整');return;}
+    beginQuiz(shuffle(ids),{type:'caseOne',source:'trade',chapterId:'T12',display:'信用狀案例一｜10 題'},false);
   }
   function startGroup(groupId){
     const g=groups.get(groupId);
@@ -239,6 +246,18 @@
   function attachmentNote(q){
     if(!q.contextRequired)return '';
     const pages=(q.referencePages||[]).join('、');
+    if(q.caseId==='LC01'&&caseOne){
+      const fields=caseOne.documents.flatMap(d=>d.fields.map(x=>({...x,document:d.title})));
+      const mapping=new Map(fields.map(x=>[x.id,x]));
+      const fieldHtml=x=>'<div class="lc-field"><div class="lc-field-title">'+escapeHTML(x.document?x.document+'｜':'')+escapeHTML(x.label)+'</div><div class="lc-field-text">'+escapeHTML(x.text)+'</div></div>';
+      const snippets=(caseOne.questionFields[q.id]||[]).map(id=>mapping.get(id)).filter(Boolean).map(fieldHtml).join('');
+      const all=caseOne.documents.map(d=>'<details class="lc-document"><summary>'+escapeHTML(d.title)+'　（原 PDF 第 '+d.page+' 頁）</summary><div class="lc-document-body">'+d.fields.map(fieldHtml).join('')+'</div></details>').join('');
+      return '<section class="lc-reference"><div class="lc-reference-heading"><strong>案例一｜本題相關條款與單據欄位</strong></div>'+
+      '<p class="lc-ref-hint">保留原文及待填空格；上下滑動閱讀，不會預先顯示正解。</p>'+
+      '<div class="lc-excerpts">'+snippets+'</div>'+
+      '<details class="lc-full"><summary>展開完整案例資料（信用狀／匯票／發票／提單）</summary>'+
+      '<p class="lc-ref-hint">文字轉錄自原 PDF 第 58～60 頁，原始空格版面請對照 PDF。</p>'+all+'</details></section>';
+    }
     return '<details class="context"><summary>信用狀案例 '+q.caseNumber+'：查看所需附表頁碼</summary>'+
       '<p>請對照原始《國際貿易大會考題庫》PDF 的第 '+escapeHTML(pages)+' 頁（信用狀、發票、提單等），以及題目所在的第 '+escapeHTML(q.page)+' 頁。</p>'+
       '<p>目前網頁尚未附完整原始附件圖片；需要對照文件才能作答的題目，請先備妥原始 PDF。</p></details>';
@@ -402,15 +421,22 @@
   Promise.all([
     fetch('./questions.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得 questions.json');return r.json();}),
     fetch('./chapter-groups.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得 chapter-groups.json');return r.json();}),
-    fetch('./explanations.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得 explanations.json');return r.json();})
-  ]).then(([qs,data,detail])=>{
+    fetch('./explanations.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得 explanations.json');return r.json();}),
+    fetch('./lc-case1.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('無法取得案例一參考資料');return r.json();})
+  ]).then(([qs,data,detail,caseData])=>{
     questions=qs;manifest=data;validateBank(qs,data);
     if(!detail||Object.keys(detail).length!==qs.length||
       qs.some(q=>!detail[q.id]||typeof detail[q.id].core!=='string'||
       !Array.isArray(detail[q.id].choices)||detail[q.id].choices.length!==4)){
       throw Error('詳解資料與題庫不一致，請重新整理。');
     }
+    const lc1=qs.filter(q=>q.caseId==='LC01');
+    const fieldIds=new Set(caseData?.documents?.flatMap(d=>d.fields.map(x=>x.id))||[]);
+    if(caseData?.caseId!=='LC01'||caseData?.documents?.length!==4||lc1.length!==10||
+      lc1.some(q=>!Array.isArray(caseData.questionFields?.[q.id])||
+        caseData.questionFields[q.id].some(id=>!fieldIds.has(id))))throw Error('案例一參考資料對應不完整');
     explanations=detail;
+    caseOne=caseData;
     home();
   }).catch(e=>{
     console.error(e);

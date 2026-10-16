@@ -1,0 +1,21 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const qs=require('../questions.json').filter(q=>q.caseId==='LC01');
+const c=require('../lc-case1.json');
+const app=fs.readFileSync('app.js','utf8');
+const workflow=fs.readFileSync('.github/workflows/pages.yml','utf8');
+assert.equal(qs.length,10);
+assert.equal(c.caseId,'LC01');
+assert.deepEqual(c.documents.map(d=>d.page),[58,59,59,60]);
+const fieldIds=new Set(c.documents.flatMap(d=>d.fields.map(f=>f.id)));
+assert.equal(fieldIds.size,c.documents.reduce((n,d)=>n+d.fields.length,0));
+for(const q of qs){const fields=c.questionFields[q.id];assert.ok(Array.isArray(fields)&&fields.length>=2,q.id);for(const id of fields)assert.ok(fieldIds.has(id),id);}
+assert.ok(c.documents[0].fields.find(f=>f.id==='lc-46A-packing').text.includes('IN DUPLICATE'));
+assert.ok(c.documents[2].fields.find(f=>f.id==='invoice-5').text.includes('(5) ________'));
+assert.ok(c.documents[3].fields.find(f=>f.id==='bl-13').text.includes('(13)'));
+assert.ok(app.includes('function startCaseOne()'));
+assert.ok(app.includes("q.caseId==='LC01'&&caseOne"));
+assert.ok(app.includes('lc-excerpts'));
+assert.ok(workflow.includes('lc-case1.json .nojekyll _site/'));
+console.log('PASS: LC case 1 shows all 10 original items and relevant source document fields.');

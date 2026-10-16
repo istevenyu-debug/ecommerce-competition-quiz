@@ -26,6 +26,9 @@
 - 現已新增 `explanations.json`：500 題學生版解析，逐題含核心觀念、四選項解說、必記重點。交卷後在「逐題檢討」按「查看詳解」展開閱讀；教師審核稿的紅色「待複核」提醒不放進學生畫面。
 - 公開 GitHub Pages 的題目及答案可供訪客檢視，僅供教學與練習使用。
 
+## 信用狀案例一 10 題專用入口
+國貿第十二章新增單獨的案例一 10 題練習，與既有題庫共用同一組題號及詳解，全部仍為 500 題。案例一原 PDF 第 56–57 頁出題，第 58–60 頁為信用狀、匯票、發票與提單。網站 `lc-case1.json` 保留附件原文及空格，每題預設顯示相關欄位，可向下滑動選答並展開全文文字欄位。原紙本單據空格位置仍請以 PDF 為準。案例二至五未修改。
+
 ## 手機測驗畫面（2026-10-16）
 
 手機進入「實際作答」頁時，隱藏 APP 網站標題、模式說明、版本等頁首資訊，答題區從畫面頂部開始並放大題目、選項。返回首頁、章節列表、成績與檢討頁時，恢復頁首；電腦版保留頁首。
@@ -45,6 +48,6 @@
 ## 站點發布
 
 GitHub Repository → Settings → Pages → **Build and deployment Source: GitHub Actions**。
-每次 main 有新提交即會觸發 `.github/workflows/pages.yml`，先檢查程式和題庫分組，再發布 `index.html`、`app.js`、`questions.json`、`chapter-groups.json`、`explanations.json`。
+每次 main 有新提交即會觸發 `.github/workflows/pages.yml`，先檢查程式和題庫分組，再發布 `index.html`、`app.js`、`questions.json`、`chapter-groups.json`、`explanations.json`、`lc-case1.json`。
 
 執行 `node test/check-bank.cjs` 可檢查全部 500 題與 22 個題組的分配。

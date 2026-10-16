@@ -25,11 +25,12 @@ jobs:
           node test/check-explanations.cjs
           node test/check-themes.cjs
           node test/check-mobile-quiz.cjs
+          node test/check-lc-case1.cjs
           node test/check-auto-next.cjs
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp index.html app.js questions.json chapter-groups.json explanations.json .nojekyll _site/
+          cp index.html app.js questions.json chapter-groups.json explanations.json lc-case1.json .nojekyll _site/
       - uses: actions/configure-pages@v5
         with:
           enablement: true
