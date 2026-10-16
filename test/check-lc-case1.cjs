@@ -17,7 +17,7 @@ assert.ok(c.documents[3].fields.find(f=>f.id==='bl-13').text.includes('(13)'));
 assert.ok(app.includes('function startCaseOne()'));
 assert.ok(app.includes("q.caseId==='LC01'&&caseOne"));
 assert.ok(app.includes('lc-excerpts'));
-assert.ok(workflow.includes('lc-case1.json .nojekyll _site/'));
+assert.ok(workflow.includes('lc-case1.json lc-all-cases.json .nojekyll _site/'));
 const vm=require('node:vm');
 const source=fs.readFileSync('app.js','utf8');
 const begin=source.indexOf('  function attachmentNote(q){');
