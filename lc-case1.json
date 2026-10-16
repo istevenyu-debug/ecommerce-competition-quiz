@@ -1,0 +1,469 @@
+{
+  "caseId": "LC01",
+  "title": "案例一｜信用狀、匯票、發票與提單",
+  "pdfQuestionPages": [
+    56,
+    57
+  ],
+  "pdfAttachmentPages": [
+    58,
+    59,
+    60
+  ],
+  "sourceNote": "依《國際貿易大會考題庫》PDF 第58–60頁整理為手機閱讀用文字欄位；保留原始英文及（1）至（13）空格，不提供預填答案。文字版不等於原始單據版面。",
+  "documents": [
+    {
+      "id": "lc",
+      "title": "信用狀 L/C",
+      "page": 58,
+      "fields": [
+        {
+          "id": "lc-27",
+          "label": "27｜Sequence of Total",
+          "text": "1/1"
+        },
+        {
+          "id": "lc-40A",
+          "label": "40A｜Form of Doc. Credit",
+          "text": "IRREVOCABLE"
+        },
+        {
+          "id": "lc-20",
+          "label": "20｜Doc. Credit Number",
+          "text": "12345"
+        },
+        {
+          "id": "lc-31C",
+          "label": "31C｜Date of Issue",
+          "text": "141108"
+        },
+        {
+          "id": "lc-31D",
+          "label": "31D｜Expiry",
+          "text": "DATE 141208 TAIWAN"
+        },
+        {
+          "id": "lc-52A",
+          "label": "52A｜Issuing Bank",
+          "text": "WELL COMMERCIAL BANK, PARIS"
+        },
+        {
+          "id": "lc-50",
+          "label": "50｜Applicant",
+          "text": "APP CO., LTD., 22, RUE DU GRENIER-SAINT-LAZARE, PARIS, FRANCE"
+        },
+        {
+          "id": "lc-59",
+          "label": "59｜Beneficiary",
+          "text": "BEN CO., LTD., 4F, NO. 200, SEC. 2, FUSING S. RD., TAIPEI, TAIWAN"
+        },
+        {
+          "id": "lc-32B",
+          "label": "32B｜Amount",
+          "text": "CURRENCY EUR AMOUNT 90,000.00"
+        },
+        {
+          "id": "lc-39A",
+          "label": "39A｜Percentage Credit Amount Tolerance",
+          "text": "03/03"
+        },
+        {
+          "id": "lc-40E",
+          "label": "40E｜Applicable Rules",
+          "text": "UCP LATEST VERSION"
+        },
+        {
+          "id": "lc-41D",
+          "label": "41D｜Available with/by",
+          "text": "SMILE COMMERCIAL BANK FUSING BRANCH BY NEGOTIATION"
+        },
+        {
+          "id": "lc-42C",
+          "label": "42C｜Drafts at",
+          "text": "SIGHT FOR FULL INVOICE VALUE"
+        },
+        {
+          "id": "lc-42D",
+          "label": "42D｜Drawee",
+          "text": "ISSUING BANK"
+        },
+        {
+          "id": "lc-44E",
+          "label": "44E｜Port of Loading",
+          "text": "HO CHI MINH CITY, VIETNAM"
+        },
+        {
+          "id": "lc-44F",
+          "label": "44F｜Port of Discharge",
+          "text": "MARSEILLE, FRANCE"
+        },
+        {
+          "id": "lc-43P",
+          "label": "43P｜Partial Shipments",
+          "text": "ALLOWED"
+        },
+        {
+          "id": "lc-43T",
+          "label": "43T｜Transshipment",
+          "text": "NOT ALLOWED"
+        },
+        {
+          "id": "lc-45A",
+          "label": "45A｜Shipment of Goods",
+          "text": "5,000 SETS OF STATIONERY CIF MARSEILLE\nAS PER CONTRACT NO. 67890 AGAINST PURCHASE ORDER NO.141010 SHIPPED IN CONTAINERS\nSHIPPING MARK: APP (IN TRI.)"
+        },
+        {
+          "id": "lc-46A-invoice",
+          "label": "46A｜Commercial Invoice",
+          "text": "+COMMERCIAL INVOICE IN TRIPLICATE SHOWING COUNTRY OF ORIGIN IS VIETNAM"
+        },
+        {
+          "id": "lc-46A-packing",
+          "label": "46A｜Packing List",
+          "text": "+PACKING LIST IN DUPLICATE"
+        },
+        {
+          "id": "lc-46A-bl",
+          "label": "46A｜Ocean Bill of Lading",
+          "text": "+FULL SET CLEAN ON BOARD OCEAN BILLS OF LADING MADE OUT TO ORDER AND BLANK ENDORSED INDICATING HAPPY CO., VINCOM CENTRE, 20/F 300 PASTEUR STREET, DISTRICT 1, HO CHI MINH CITY, SOCIALIST REPUBLIC OF VIETNAM AS SHIPPER MARKED FREIGHT PREPAID AND NOTIFY APPLICANT"
+        },
+        {
+          "id": "lc-46A-insurance",
+          "label": "46A｜Marine Insurance",
+          "text": "+MARINE INSURANCE POLICY/CERTIFICATE IN NEGOTIABLE FORM FOR FULL INVOICE VALUE PLUS 10 PERCENT COVERING INSTITUTE CARGO CLAUSES (A), INSTITUTE WAR CLAUSES (CARGO) CLAIMS PAYABLE IN PARIS IN THE CURRENCY OF THE DRAFT"
+        },
+        {
+          "id": "lc-46A-beneficiary",
+          "label": "46A｜Beneficiary's Certificate",
+          "text": "+BENEFICIARY’S CERTIFICATE CERTIFYING THAT ONE COPY EACH OF COMMERCIAL INVOICE AND PACKING LIST HAVE BEEN SENT TO APPLICANT WITHIN 2 DAYS AFTER SHIPMENT"
+        },
+        {
+          "id": "lc-47A-courier",
+          "label": "47A｜Documents Despatch",
+          "text": "+DOCUMENTS MUST BE DESPATCHED BY COURIER SERVICE IN ONE COVER TO THE ISSUING BANK"
+        },
+        {
+          "id": "lc-47A-quantity",
+          "label": "47A｜Quantity Tolerance",
+          "text": "+3 PERCENT MORE OR LESS IN QUANTITY IS ACCEPTABLE"
+        },
+        {
+          "id": "lc-48",
+          "label": "48｜Period for Presentation",
+          "text": "WITHIN 10 DAYS AFTER DATE OF SHIPMENT BUT WITHIN THE VALIDITY OF THE CREDIT"
+        },
+        {
+          "id": "lc-49",
+          "label": "49｜Confirmation Instructions",
+          "text": "WITHOUT"
+        },
+        {
+          "id": "lc-57D",
+          "label": "57D｜Advise Through Bank Name and Address",
+          "text": "SMILE COMMERCIAL BANK FUSING BRANCH, 1F., NO. 200 SEC. 2, FUSING S. RD., TAIPEI, TAIWAN"
+        }
+      ]
+    },
+    {
+      "id": "draft",
+      "title": "匯票 Bill of Exchange",
+      "page": 59,
+      "fields": [
+        {
+          "id": "draft-head",
+          "label": "BILL OF EXCHANGE｜表頭",
+          "text": "NO. 67890\nTAIWAN  NOV. 15, 2014"
+        },
+        {
+          "id": "draft-1",
+          "label": "EXCHANGE FOR｜空格 (1)",
+          "text": "EXCHANGE FOR  (1) ________"
+        },
+        {
+          "id": "draft-at",
+          "label": "AT...SIGHT",
+          "text": "AT XXX SIGHT OF THIS FIRST OF EXCHANGE (SECOND OF THE SAME TENOR AND DATE BEING UNPAID)"
+        },
+        {
+          "id": "draft-pay",
+          "label": "PAY TO THE ORDER OF",
+          "text": "SMILE COMMERCIAL BANK"
+        },
+        {
+          "id": "draft-sum",
+          "label": "THE SUM OF",
+          "text": "XXX  VALUE RECEIVED"
+        },
+        {
+          "id": "draft-2",
+          "label": "DRAWN UNDER｜空格 (2)",
+          "text": "DRAWN UNDER  (2) ________"
+        },
+        {
+          "id": "draft-lc",
+          "label": "L/C NO. / DATED",
+          "text": "L/C NO. 12345\nDATED XXX"
+        },
+        {
+          "id": "draft-3",
+          "label": "TO｜空格 (3)",
+          "text": "TO  (3) ________"
+        },
+        {
+          "id": "draft-4",
+          "label": "右下欄位｜空格 (4)",
+          "text": "(4) ________"
+        }
+      ]
+    },
+    {
+      "id": "invoice",
+      "title": "發票 Invoice",
+      "page": 59,
+      "fields": [
+        {
+          "id": "invoice-head",
+          "label": "INVOICE｜表頭",
+          "text": "No. 67890\nDate NOV. 15, 2014"
+        },
+        {
+          "id": "invoice-of",
+          "label": "Invoice of",
+          "text": "2,000 SETS OF STATIONERY"
+        },
+        {
+          "id": "invoice-account",
+          "label": "For account & risk of Messrs.",
+          "text": "APP CO., LTD., 22, RUE DU GRENIER-SAINT-LAZARE, PARIS, FRANCE"
+        },
+        {
+          "id": "invoice-shipped",
+          "label": "Shipped by",
+          "text": "XXX"
+        },
+        {
+          "id": "invoice-5",
+          "label": "Per｜空格 (5)",
+          "text": "Per  (5) ________\nSailing on or about ________"
+        },
+        {
+          "id": "invoice-from-to",
+          "label": "From / To",
+          "text": "From XXX\nTo XXX"
+        },
+        {
+          "id": "invoice-marks",
+          "label": "Marks & Nos.",
+          "text": "XXX"
+        },
+        {
+          "id": "invoice-details",
+          "label": "Description / Quantity / Unit Price / Amount",
+          "text": "STATIONERY\nAD-12  1,200 sets  EUR20.00/set  XXX\nBC-34  800 sets  EUR15.00/set  XXX\nTotal  2,000 sets"
+        },
+        {
+          "id": "invoice-6",
+          "label": "表內報價欄位｜空格 (6)",
+          "text": "(6) ________"
+        },
+        {
+          "id": "invoice-total",
+          "label": "SAY TOTAL / DRAWN UNDER",
+          "text": "SAY TOTAL XXX\nDRAWN UNDER …XXX…"
+        },
+        {
+          "id": "invoice-contract",
+          "label": "Contract / Purchase Order",
+          "text": "AS PER CONTRACT NO. 67890 AGAINST PURCHASE ORDER NO. 141010"
+        },
+        {
+          "id": "invoice-7",
+          "label": "表格左下方｜空格 (7)",
+          "text": "(7) ________"
+        }
+      ]
+    },
+    {
+      "id": "bl",
+      "title": "海運提單 Bill of Lading",
+      "page": 60,
+      "fields": [
+        {
+          "id": "bl-head",
+          "label": "BILL OF LADING / Carrier",
+          "text": "WIN LINE LTD."
+        },
+        {
+          "id": "bl-8",
+          "label": "Shipper / Exporter｜空格 (8)",
+          "text": "(8) ________"
+        },
+        {
+          "id": "bl-9",
+          "label": "Consignee｜空格 (9)",
+          "text": "(9) ________"
+        },
+        {
+          "id": "bl-10",
+          "label": "Notify Party (full name and address)｜空格 (10)",
+          "text": "(10) ________"
+        },
+        {
+          "id": "bl-receipt",
+          "label": "Place of Receipt",
+          "text": "HO CHI MINH CITY, VIETNAM  CY"
+        },
+        {
+          "id": "bl-loading",
+          "label": "Port of Loading",
+          "text": "HO CHI MINH CITY, VIETNAM"
+        },
+        {
+          "id": "bl-service",
+          "label": "Service Mode",
+          "text": "□ CY-CY   □ CY-CFS\n□ CFS-CY   ☑ CFS-CFS"
+        },
+        {
+          "id": "bl-vessel",
+          "label": "Ocean Vessel",
+          "text": "BREVIK BRIDGE"
+        },
+        {
+          "id": "bl-voyage",
+          "label": "Voy. No.",
+          "text": "S124"
+        },
+        {
+          "id": "bl-11",
+          "label": "Port of Discharge｜空格 (11)",
+          "text": "(11) ________"
+        },
+        {
+          "id": "bl-delivery",
+          "label": "Place of Delivery",
+          "text": "（原表格未填寫）"
+        },
+        {
+          "id": "bl-12",
+          "label": "Freight to be｜空格 (12)",
+          "text": "(12)  □ PREPAID   □ COLLECT"
+        },
+        {
+          "id": "bl-marks",
+          "label": "Marks & Nos.",
+          "text": "XXX"
+        },
+        {
+          "id": "bl-pkgs",
+          "label": "No. of Pkgs. or Containers",
+          "text": "100 CTNS."
+        },
+        {
+          "id": "bl-goods",
+          "label": "Description of Goods",
+          "text": "XXX"
+        },
+        {
+          "id": "bl-weight",
+          "label": "Gross Weight",
+          "text": "1,254.30 KGS"
+        },
+        {
+          "id": "bl-measurement",
+          "label": "Measurement",
+          "text": "10.6 CBM"
+        },
+        {
+          "id": "bl-13",
+          "label": "TOTAL｜空格 (13)",
+          "text": "TOTAL ……  (13) …… ONLY."
+        },
+        {
+          "id": "bl-original",
+          "label": "Number of Original B/L(s)",
+          "text": "THREE(3)"
+        },
+        {
+          "id": "bl-date",
+          "label": "Place and Date of Issue",
+          "text": "NOV. 15, 2014"
+        },
+        {
+          "id": "bl-on-board",
+          "label": "Shipped on Board Date",
+          "text": "NOV. 15, 2014"
+        },
+        {
+          "id": "bl-sign",
+          "label": "Carrier Signature",
+          "text": "WIN LINE LTD.\nXXX\nAs Carrier"
+        }
+      ]
+    }
+  ],
+  "questionFields": {
+    "T56-1": [
+      "lc-40A",
+      "lc-41D",
+      "lc-42C",
+      "lc-49"
+    ],
+    "T56-2": [
+      "lc-31C",
+      "lc-31D",
+      "lc-48"
+    ],
+    "T56-3": [
+      "lc-40E",
+      "lc-43P",
+      "lc-42C",
+      "lc-46A-insurance"
+    ],
+    "T56-4": [
+      "lc-32B",
+      "lc-42C",
+      "lc-46A-insurance"
+    ],
+    "T56-5": [
+      "lc-31C",
+      "lc-46A-invoice",
+      "lc-46A-packing",
+      "lc-47A-courier"
+    ],
+    "T56-6": [
+      "lc-42C",
+      "invoice-details",
+      "draft-1"
+    ],
+    "T56-7": [
+      "invoice-5",
+      "bl-vessel",
+      "bl-voyage",
+      "lc-44E",
+      "lc-44F"
+    ],
+    "T56-8": [
+      "invoice-7",
+      "lc-46A-invoice",
+      "lc-45A"
+    ],
+    "T57-9": [
+      "draft-2",
+      "draft-4",
+      "invoice-6",
+      "bl-10",
+      "lc-42D",
+      "lc-52A",
+      "lc-50"
+    ],
+    "T57-10": [
+      "bl-8",
+      "bl-11",
+      "bl-12",
+      "bl-13",
+      "lc-46A-bl",
+      "lc-44F",
+      "bl-pkgs"
+    ]
+  }
+}
