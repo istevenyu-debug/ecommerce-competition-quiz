@@ -157,6 +157,235 @@
           ],
           "showBill46A": true
         }
+      },
+      "optionEvidence": {
+        "T56-1": {
+          "A": [
+            "40A",
+            "49"
+          ],
+          "B": [
+            "41",
+            "42"
+          ],
+          "C": [
+            "40A"
+          ],
+          "D": [
+            "41",
+            "42"
+          ]
+        },
+        "T56-2": {
+          "A": [
+            "45A",
+            "@no44C"
+          ],
+          "B": [
+            "31C"
+          ],
+          "C": [
+            "31D",
+            "48",
+            "@no44C"
+          ],
+          "D": [
+            "31D",
+            "48",
+            "@no44C"
+          ]
+        },
+        "T56-3": {
+          "A": [
+            "43P"
+          ],
+          "B": [
+            "40E"
+          ],
+          "C": [
+            "42"
+          ],
+          "D": [
+            "46A"
+          ]
+        },
+        "T56-4": {
+          "A": [
+            "46A"
+          ],
+          "B": [
+            "46A"
+          ],
+          "C": [
+            "32B",
+            "46A"
+          ],
+          "D": [
+            "46A"
+          ]
+        },
+        "T56-5": {
+          "A": [
+            "46A",
+            "#invoice"
+          ],
+          "B": [
+            "46A",
+            "#invoice"
+          ],
+          "C": [
+            "46A",
+            "#copies"
+          ],
+          "D": [
+            "31C",
+            "#date"
+          ]
+        },
+        "T56-6": {
+          "A": [
+            "32B",
+            "@invoice",
+            "@draft"
+          ],
+          "B": [
+            "32B",
+            "46A",
+            "@invoice"
+          ],
+          "C": [
+            "42",
+            "@invoice",
+            "@draft"
+          ],
+          "D": [
+            "46A",
+            "@invoice"
+          ]
+        },
+        "T56-7": {
+          "A": [
+            "@blVessel",
+            "@invoiceBlank"
+          ],
+          "B": [
+            "45A",
+            "@invoiceBlank"
+          ],
+          "C": [
+            "59",
+            "@invoiceBlank"
+          ],
+          "D": [
+            "@blVessel",
+            "@invoiceBlank"
+          ]
+        },
+        "T56-8": {
+          "A": [
+            "46A",
+            "@invoiceBlank"
+          ],
+          "B": [
+            "45A",
+            "@invoiceBlank"
+          ],
+          "C": [
+            "45A",
+            "@invoiceBlank"
+          ],
+          "D": [
+            "46A",
+            "@invoiceBlank"
+          ]
+        },
+        "T57-9": {
+          "A": [
+            "@bank",
+            "41",
+            "@draft",
+            "#draft"
+          ],
+          "B": [
+            "59",
+            "@draft"
+          ],
+          "C": [
+            "45A",
+            "@invoiceBlank"
+          ],
+          "D": [
+            "50",
+            "@blBlank"
+          ]
+        },
+        "T57-10": {
+          "A": [
+            "46A",
+            "59",
+            "@blBlank",
+            "#order"
+          ],
+          "B": [
+            "44F",
+            "@blBlank"
+          ],
+          "C": [
+            "46A",
+            "@blBlank"
+          ],
+          "D": [
+            "@blPacks"
+          ]
+        }
+      },
+      "originalFacts": {
+        "bank": {
+          "page": 58,
+          "title": "52A 開狀銀行",
+          "text": "WELL COMMERCIAL BANK, PARIS"
+        },
+        "invoice": {
+          "page": 59,
+          "title": "發票貨品、數量、單價",
+          "text": "AD-12: 1,200 sets × EUR20.00/set；BC-34: 800 sets × EUR15.00/set；Total 2,000 sets。",
+          "imageId": "lc01-invoice"
+        },
+        "draft": {
+          "page": 59,
+          "title": "匯票空格",
+          "text": "EXCHANGE FOR (1)；DRAWN UNDER (2)；TO (3)；右下 (4)。",
+          "imageId": "lc01-draft"
+        },
+        "blVessel": {
+          "page": 60,
+          "title": "提單船名、航次、承運人",
+          "text": "Ocean Vessel: BREVIK BRIDGE；Voy. No.: S124；Carrier: WIN LINE LTD.",
+          "imageId": "lc01-bl"
+        },
+        "blPacks": {
+          "page": 60,
+          "title": "提單裝箱件數",
+          "text": "No. of Pkgs. or Containers: 100 CTNS.；TOTAL (13) … ONLY。",
+          "imageId": "lc01-bl"
+        },
+        "blBlank": {
+          "page": 60,
+          "title": "提單空格欄位",
+          "text": "Shipper (8)；Consignee (9)；Notify Party (10)；Port of Discharge (11)；Freight to be (12)；Total (13)。",
+          "imageId": "lc01-bl"
+        },
+        "invoiceBlank": {
+          "page": 59,
+          "title": "原發票空格與相關欄位",
+          "text": "Per (5)；商品價款欄 (6)；左下 (7)；Contract No.67890, Purchase Order No.141010。",
+          "imageId": "lc01-invoice"
+        },
+        "no44C": {
+          "page": 58,
+          "title": "原信用狀裝運日期欄位",
+          "text": "本信用狀第58頁沒有另列 44C Latest Date of Shipment 欄位；另有 31D 到期日、48 提示期限。"
+        }
       }
     },
     "LC02": {
@@ -329,6 +558,238 @@
           "page": 65,
           "imageId": "lc02-bl"
         }
+      },
+      "optionEvidence": {
+        "T61-1": {
+          "A": [
+            "40A",
+            "41",
+            "42"
+          ],
+          "B": [
+            "40A",
+            "42"
+          ],
+          "C": [
+            "40A"
+          ],
+          "D": [
+            "40A",
+            "41"
+          ]
+        },
+        "T61-2": {
+          "A": [
+            "@sender",
+            "42"
+          ],
+          "B": [
+            "@receiver",
+            "47A"
+          ],
+          "C": [
+            "@receiver",
+            "50",
+            "42"
+          ],
+          "D": [
+            "@receiver",
+            "47A",
+            "42",
+            "#draft"
+          ]
+        },
+        "T61-3": {
+          "A": [
+            "31D",
+            "44C",
+            "48",
+            "@shipment",
+            "#expiry"
+          ],
+          "B": [
+            "31D",
+            "44C",
+            "48",
+            "@shipment",
+            "#expiry"
+          ],
+          "C": [
+            "44C"
+          ],
+          "D": [
+            "48",
+            "@shipment"
+          ]
+        },
+        "T61-4": {
+          "A": [
+            "46A"
+          ],
+          "B": [
+            "47A"
+          ],
+          "C": [
+            "46A"
+          ],
+          "D": [
+            "47A",
+            "31C"
+          ]
+        },
+        "T61-5": {
+          "A": [
+            "46A"
+          ],
+          "B": [
+            "46A"
+          ],
+          "C": [
+            "46A"
+          ],
+          "D": [
+            "46A"
+          ]
+        },
+        "T61-6": {
+          "A": [
+            "46A",
+            "@invoice",
+            "#invoice"
+          ],
+          "B": [
+            "46A",
+            "@invoice",
+            "#invoice"
+          ],
+          "C": [
+            "46A",
+            "@invoice",
+            "#invoice"
+          ],
+          "D": [
+            "46A",
+            "@invoice",
+            "#invoice"
+          ]
+        },
+        "T61-7": {
+          "A": [
+            "50",
+            "59",
+            "@invoice"
+          ],
+          "B": [
+            "@vessel",
+            "@invoice"
+          ],
+          "C": [
+            "@ports",
+            "@invoice"
+          ],
+          "D": [
+            "45A",
+            "@invoice",
+            "#incoterms"
+          ]
+        },
+        "T62-8": {
+          "A": [
+            "46A",
+            "@bl"
+          ],
+          "B": [
+            "46A",
+            "@bl"
+          ],
+          "C": [
+            "46A",
+            "@bl"
+          ],
+          "D": [
+            "46A",
+            "@bl"
+          ]
+        },
+        "T62-9": {
+          "A": [
+            "44F",
+            "@ports"
+          ],
+          "B": [
+            "44E",
+            "44F",
+            "@ports"
+          ],
+          "C": [
+            "44F",
+            "@ports"
+          ],
+          "D": [
+            "44E",
+            "@ports"
+          ]
+        },
+        "T62-10": {
+          "A": [
+            "@bl",
+            "#carrier"
+          ],
+          "B": [
+            "@bl",
+            "#carrier"
+          ],
+          "C": [
+            "@bl",
+            "#carrier"
+          ],
+          "D": [
+            "@bl",
+            "#carrier"
+          ]
+        }
+      },
+      "originalFacts": {
+        "sender": {
+          "page": 63,
+          "title": "電文 Sender（發送銀行）",
+          "text": "ORBCINBBSPC — ORIENTAL BANK OF COMMERCE"
+        },
+        "receiver": {
+          "page": 63,
+          "title": "電文 Receiver（收訊銀行）",
+          "text": "TCBBTWTHXXX — TAICHUNG COMMERCIAL BANK"
+        },
+        "vessel": {
+          "page": 65,
+          "title": "提單船名、航次",
+          "text": "Ocean Vessel: QUEEN；Voy. No.: 001E-033。",
+          "imageId": "lc02-bl"
+        },
+        "ports": {
+          "page": 65,
+          "title": "提單裝卸貨港",
+          "text": "Port of Loading: TAICHUNG, TAIWAN；Port of Discharge (7) 待填。",
+          "imageId": "lc02-bl"
+        },
+        "bl": {
+          "page": 65,
+          "title": "提單抬頭及簽名欄",
+          "text": "Consignee (6)；Carrier: ABC LINE LIMITED；Peter Lee 簽名，(8) 為簽署身分。",
+          "imageId": "lc02-bl"
+        },
+        "invoice": {
+          "page": 64,
+          "title": "發票待填欄位",
+          "text": "Invoice of (1)；For account and risk of Messrs. (2)；Shipped Per (3)；From (4)；To (5)。",
+          "imageId": "lc02-invoice"
+        },
+        "shipment": {
+          "page": 65,
+          "title": "提單簽發日、裝船日",
+          "text": "Shipped on Board Date: MAR.23,2017；Place and Date of Issue: TAICHUNG MAR.23,2017。",
+          "imageId": "lc02-bl"
+        }
       }
     },
     "LC03": {
@@ -481,6 +942,205 @@
             "lc03-bl"
           ],
           "showBill46A": true
+        }
+      },
+      "optionEvidence": {
+        "T66-1": {
+          "A": [
+            "40A",
+            "41",
+            "42"
+          ],
+          "B": [
+            "40A",
+            "41",
+            "42"
+          ],
+          "C": [
+            "40A",
+            "42"
+          ],
+          "D": [
+            "41",
+            "49"
+          ]
+        },
+        "T66-2": {
+          "A": [
+            "42"
+          ],
+          "B": [
+            "42"
+          ],
+          "C": [
+            "42"
+          ],
+          "D": [
+            "42"
+          ]
+        },
+        "T66-3": {
+          "A": [
+            "41",
+            "46A"
+          ],
+          "B": [
+            "46A",
+            "#other"
+          ],
+          "C": [
+            "46A",
+            "@bl",
+            "#carrier"
+          ],
+          "D": [
+            "46A",
+            "#other"
+          ]
+        },
+        "T66-4": {
+          "A": [
+            "43P"
+          ],
+          "B": [
+            "46A",
+            "#insurance"
+          ],
+          "C": [
+            "41"
+          ],
+          "D": [
+            "48",
+            "31D"
+          ]
+        },
+        "T66-5": {
+          "A": [
+            "46A",
+            "#order"
+          ],
+          "B": [
+            "46A"
+          ],
+          "C": [
+            "71"
+          ],
+          "D": [
+            "72"
+          ]
+        },
+        "T66-6": {
+          "A": [
+            "31C",
+            "45A",
+            "@packing",
+            "#date"
+          ],
+          "B": [
+            "31C",
+            "@packing",
+            "#date"
+          ],
+          "C": [
+            "44C",
+            "@packing"
+          ],
+          "D": [
+            "31D",
+            "@packing"
+          ]
+        },
+        "T66-7": {
+          "A": [
+            "50",
+            "@packing"
+          ],
+          "B": [
+            "59",
+            "@packing"
+          ],
+          "C": [
+            "45A",
+            "@packing"
+          ],
+          "D": [
+            "41",
+            "@packing"
+          ]
+        },
+        "T67-8": {
+          "A": [
+            "50",
+            "47A",
+            "@bl"
+          ],
+          "B": [
+            "59",
+            "47A",
+            "@bl"
+          ],
+          "C": [
+            "41",
+            "@bl"
+          ],
+          "D": [
+            "45A",
+            "@bl"
+          ]
+        },
+        "T67-9": {
+          "A": [
+            "59",
+            "46A",
+            "@bl"
+          ],
+          "B": [
+            "50",
+            "46A",
+            "@bl"
+          ],
+          "C": [
+            "41",
+            "46A",
+            "@bl"
+          ],
+          "D": [
+            "46A",
+            "@bl"
+          ]
+        },
+        "T67-10": {
+          "A": [
+            "44F",
+            "@bl"
+          ],
+          "B": [
+            "44F",
+            "@bl"
+          ],
+          "C": [
+            "44E",
+            "44F",
+            "@bl"
+          ],
+          "D": [
+            "44F",
+            "@bl"
+          ]
+        }
+      },
+      "originalFacts": {
+        "packing": {
+          "page": 69,
+          "title": "原裝箱單欄位",
+          "text": "Packing List No.5678；Date (1)；For Account & Risk of Messrs. (2)；SAY TOTAL THREE HUNDRED (300) CARTONS ONLY。",
+          "imageId": "lc03-packing"
+        },
+        "bl": {
+          "page": 70,
+          "title": "提單各空格及簽發公司",
+          "text": "Shipper (3)；Consignee (4)；Port of Discharge (5)；單據載 SEA DRAGON INTERNATIONAL LIMITED；(The other parts are omitted.)。",
+          "imageId": "lc03-bl"
         }
       }
     },
@@ -656,6 +1316,241 @@
           "label": "提單 Place and Date of Issue（簽發日）",
           "text": "TAICHUNG/ OCT. 22, 2020",
           "page": 75,
+          "imageId": "lc04-bl"
+        }
+      },
+      "optionEvidence": {
+        "T71-1": {
+          "A": [
+            "40A",
+            "49"
+          ],
+          "B": [
+            "40A",
+            "49"
+          ],
+          "C": [
+            "40A",
+            "41"
+          ],
+          "D": [
+            "40A",
+            "41",
+            "49"
+          ]
+        },
+        "T71-2": {
+          "A": [
+            "46A",
+            "#invoice"
+          ],
+          "B": [
+            "47A",
+            "46A"
+          ],
+          "C": [
+            "47A",
+            "59"
+          ],
+          "D": [
+            "46A"
+          ]
+        },
+        "T71-3": {
+          "A": [
+            "48",
+            "31D",
+            "@originals",
+            "#expiry"
+          ],
+          "B": [
+            "48",
+            "31D",
+            "@originals",
+            "#expiry"
+          ],
+          "C": [
+            "48",
+            "@originals",
+            "#expiry"
+          ],
+          "D": [
+            "48",
+            "@originals",
+            "#expiry"
+          ]
+        },
+        "T71-4": {
+          "A": [
+            "45A"
+          ],
+          "B": [
+            "45A",
+            "#goods"
+          ],
+          "C": [
+            "45A"
+          ],
+          "D": [
+            "45A",
+            "46A"
+          ]
+        },
+        "T71-5": {
+          "A": [
+            "31C",
+            "47A",
+            "@originals"
+          ],
+          "B": [
+            "31C",
+            "47A"
+          ],
+          "C": [
+            "46A",
+            "@originals"
+          ],
+          "D": [
+            "46A",
+            "@originals"
+          ]
+        },
+        "T71-6": {
+          "A": [
+            "@vessel",
+            "@invoice"
+          ],
+          "B": [
+            "@vessel",
+            "@ports",
+            "@invoice"
+          ],
+          "C": [
+            "@vessel",
+            "@invoice"
+          ],
+          "D": [
+            "@vessel",
+            "@ports",
+            "@invoice"
+          ]
+        },
+        "T71-7": {
+          "A": [
+            "45A",
+            "@ports",
+            "#incoterms"
+          ],
+          "B": [
+            "45A",
+            "@ports",
+            "#incoterms"
+          ],
+          "C": [
+            "45A",
+            "@ports",
+            "#incoterms"
+          ],
+          "D": [
+            "45A",
+            "@ports",
+            "#incoterms"
+          ]
+        },
+        "T72-8": {
+          "A": [
+            "46A",
+            "47A"
+          ],
+          "B": [
+            "46A",
+            "47A"
+          ],
+          "C": [
+            "46A",
+            "47A"
+          ],
+          "D": [
+            "46A",
+            "47A"
+          ]
+        },
+        "T72-9": {
+          "A": [
+            "46A",
+            "@sender"
+          ],
+          "B": [
+            "46A",
+            "@sender"
+          ],
+          "C": [
+            "46A",
+            "@sender"
+          ],
+          "D": [
+            "46A",
+            "@receiver"
+          ]
+        },
+        "T72-10": {
+          "A": [
+            "46A",
+            "@bl"
+          ],
+          "B": [
+            "46A",
+            "@bl"
+          ],
+          "C": [
+            "46A",
+            "@bl"
+          ],
+          "D": [
+            "46A",
+            "@bl"
+          ]
+        }
+      },
+      "originalFacts": {
+        "sender": {
+          "page": 73,
+          "title": "電文 Sender（發送銀行）",
+          "text": "TURKIYE IS BANKASI A.S. (ISBKTRISXXX)"
+        },
+        "receiver": {
+          "page": 73,
+          "title": "電文 Receiver（收訊銀行）",
+          "text": "MEGA INTERNATIONAL COMMERCIAL BANK CO., FENG YUAN BRANCH (ICBCTWTPXXX)"
+        },
+        "vessel": {
+          "page": 75,
+          "title": "提單船名及航次",
+          "text": "Ocean Vessel: KMARIN ATLANTICA；Voy. No.: 06Y7AW1MB。",
+          "imageId": "lc04-bl"
+        },
+        "ports": {
+          "page": 75,
+          "title": "提單裝貨港、卸貨港",
+          "text": "Port of Loading: TAICHUNG；Port of Discharge: AMBARLI PORT。",
+          "imageId": "lc04-bl"
+        },
+        "originals": {
+          "page": 75,
+          "title": "提單正本份數、裝船日",
+          "text": "Number of Original B/Ls: FOUR (4)；Shipped on Board Date: OCT.22,2020。",
+          "imageId": "lc04-bl"
+        },
+        "invoice": {
+          "page": 74,
+          "title": "發票空格與原產地",
+          "text": "Shipped Per (1)；To (2)；交易條件 (3)；THE GOODS ARE OF (4) ORIGIN。",
+          "imageId": "lc04-invoice"
+        },
+        "bl": {
+          "page": 75,
+          "title": "提單收貨人、運費空格",
+          "text": "Consignee (5)；FREIGHT (6)；Carrier ABC LINE LIMITED。",
           "imageId": "lc04-bl"
         }
       }
@@ -837,7 +1732,282 @@
           "page": 80,
           "imageId": "lc05-bl"
         }
+      },
+      "optionEvidence": {
+        "T76-1": {
+          "A": [
+            "57",
+            "42"
+          ],
+          "B": [
+            "41",
+            "42"
+          ],
+          "C": [
+            "57",
+            "42"
+          ],
+          "D": [
+            "47A",
+            "57",
+            "41"
+          ]
+        },
+        "T76-2": {
+          "A": [
+            "42",
+            "@draft"
+          ],
+          "B": [
+            "46A",
+            "#invoice"
+          ],
+          "C": [
+            "46A",
+            "#other"
+          ],
+          "D": [
+            "46A"
+          ]
+        },
+        "T76-3": {
+          "A": [
+            "40A",
+            "49"
+          ],
+          "B": [
+            "47A"
+          ],
+          "C": [
+            "41",
+            "42"
+          ],
+          "D": [
+            "47A",
+            "41"
+          ]
+        },
+        "T76-4": {
+          "A": [
+            "31D",
+            "48",
+            "@shipment",
+            "#expiry"
+          ],
+          "B": [
+            "31D",
+            "48",
+            "@shipment",
+            "#expiry"
+          ],
+          "C": [
+            "31D",
+            "48",
+            "@shipment",
+            "#expiry"
+          ],
+          "D": [
+            "31D",
+            "48",
+            "@shipment",
+            "#expiry"
+          ]
+        },
+        "T76-5": {
+          "A": [
+            "46A"
+          ],
+          "B": [
+            "42",
+            "@draft"
+          ],
+          "C": [
+            "46A"
+          ],
+          "D": [
+            "46A"
+          ]
+        },
+        "T76-6": {
+          "A": [
+            "42",
+            "59",
+            "50"
+          ],
+          "B": [
+            "42",
+            "59",
+            "@draft"
+          ],
+          "C": [
+            "57",
+            "42"
+          ],
+          "D": [
+            "57",
+            "42",
+            "59"
+          ]
+        },
+        "T76-7": {
+          "A": [
+            "@vessel",
+            "@invoice"
+          ],
+          "B": [
+            "@ports",
+            "@invoice"
+          ],
+          "C": [
+            "45A",
+            "47A",
+            "@invoice"
+          ],
+          "D": [
+            "46A",
+            "@invoice"
+          ]
+        },
+        "T77-8": {
+          "A": [
+            "45A",
+            "#incoterms"
+          ],
+          "B": [
+            "45A",
+            "#incoterms"
+          ],
+          "C": [
+            "45A",
+            "#incoterms"
+          ],
+          "D": [
+            "45A",
+            "#incoterms"
+          ]
+        },
+        "T77-9": {
+          "A": [
+            "46A",
+            "@bl"
+          ],
+          "B": [
+            "46A",
+            "@bl"
+          ],
+          "C": [
+            "46A",
+            "@bl"
+          ],
+          "D": [
+            "46A",
+            "42",
+            "@bl"
+          ]
+        },
+        "T77-10": {
+          "A": [
+            "46A",
+            "@bl"
+          ],
+          "B": [
+            "46A",
+            "@bl"
+          ],
+          "C": [
+            "46A",
+            "@bl"
+          ],
+          "D": [
+            "46A",
+            "@bl"
+          ]
+        }
+      },
+      "originalFacts": {
+        "draft": {
+          "page": 79,
+          "title": "原匯票份數、出票欄",
+          "text": "At 30 DAYS AFTER DATE sight of this FIRST of Exchange (Second of the same tenor and date being unpaid)；Pay to order (1)；Issued by (2)。",
+          "imageId": "lc05-draft"
+        },
+        "vessel": {
+          "page": 80,
+          "title": "提單船名及航次",
+          "text": "Vessel: EVER CAST；Voyage No.: 0089-091N。",
+          "imageId": "lc05-bl"
+        },
+        "ports": {
+          "page": 80,
+          "title": "提單裝卸貨港",
+          "text": "Port of Loading: TAICHUNG；Port of Discharge: BUSAN, KOREA。",
+          "imageId": "lc05-bl"
+        },
+        "bl": {
+          "page": 80,
+          "title": "提單抬頭、運費及正本份數空格",
+          "text": "Consignee (8)；貨品描述旁 (9)；Number of Original B/Ls (10)；Carrier: XYZ LINE LIMITED。",
+          "imageId": "lc05-bl"
+        },
+        "invoice": {
+          "page": 79,
+          "title": "發票空格、品名及聲明",
+          "text": "Shipped per (3)；From (4)；AS PER (5) GI-254468 DATED APR.22,2025；GOODS ARE OF (6) ORIGIN；價格條件 (7)。",
+          "imageId": "lc05-invoice"
+        },
+        "shipment": {
+          "page": 80,
+          "title": "提單實際裝船日、提單簽發日",
+          "text": "Shipped on Board Date: JULY 21, 2025；Place/Date of Issue: TAICHUNG / JULY 22, 2025。",
+          "imageId": "lc05-bl"
+        }
       }
+    }
+  },
+  "neutralRules": {
+    "invoice": {
+      "title": "發票名稱與簽署（UCP600 18；ISBP745）",
+      "text": "依信用狀指定文件名稱、是否要求 signed invoice，以及正式發票與 proforma invoice 的差別判斷。"
+    },
+    "copies": {
+      "title": "正本及副本（UCP600 17）",
+      "text": "信用狀要求 in duplicate 時，須核對至少一份正本及其他份數是否符合要求。"
+    },
+    "date": {
+      "title": "文件簽發日（UCP600 14）",
+      "text": "文件可早於信用狀簽發日，但若信用狀另有禁止更早文件日期的規定，仍須依該規定。"
+    },
+    "expiry": {
+      "title": "提示期限",
+      "text": "將提單實際裝船日期、信用狀 31D 有效期及 48 提示期間分開比較。"
+    },
+    "carrier": {
+      "title": "海運提單簽署（UCP600 20）",
+      "text": "核對運送人、船長、代理人署名及其適當簽署身分。"
+    },
+    "goods": {
+      "title": "提單貨名（UCP600 14(e)）",
+      "text": "提單可採一般性貨名描述，但不得與信用狀的貨物內容矛盾。"
+    },
+    "other": {
+      "title": "其他單據出具人（UCP600 14(f)）",
+      "text": "信用狀未限定其他文件出具人時，應依該單據功能及條款判斷。"
+    },
+    "incoterms": {
+      "title": "發票交易條件（ISBP745 C8）",
+      "text": "發票的目的港、貿易條件及 Incoterms 版本須與信用狀與實際裝貨港等資料核對。"
+    },
+    "order": {
+      "title": "指示式提單及背書",
+      "text": "需區分 TO ORDER、TO ORDER OF BANK、BLANK ENDORSED 與開狀申請人／受益人。"
+    },
+    "draft": {
+      "title": "銀行與匯票角色",
+      "text": "核對電文 Sender、Receiver、42A／42D、57A／57D，及受益人與讓購銀行各自角色。"
+    },
+    "insurance": {
+      "title": "保險百分比",
+      "text": "區分規定必須投保比例與題目文字「至少」的邏輯含義，不把 120% 誤說成低於 110%。"
     }
   }
 }
