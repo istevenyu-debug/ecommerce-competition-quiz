@@ -89,6 +89,7 @@
     const data=lcAll?.cases?.[q.caseId],config=data?.questions?.[q.id];
     if(!config)return '';
     const fields=[];
+    for(const id of config.documentFacts||[]){const fact=data.documentFacts?.[id];if(fact)fields.push({label:fact.label+'｜原 PDF 第 '+fact.page+' 頁',text:fact.text,sourceDate:true});}
     if(config.showBill46A&&data.creditBillClause)
       fields.push({label:'46A｜海運提單完整要求（原文）',text:data.creditBillClause,highlight:true});
     for(const code of config.fields){
@@ -98,7 +99,7 @@
       if(!content)continue;
       fields.push({label:code+'｜信用狀原始條款',text:content});
     }
-    const renderField=f=>'<div class="lc-ref-field'+(f.highlight?' lc-bill-highlight':'')+'"><strong>'+escapeHTML(f.label)+'</strong>'+
+    const renderField=f=>'<div class="lc-ref-field'+(f.highlight?' lc-bill-highlight':'')+(f.sourceDate?' lc-date-source':'')+'"><strong>'+escapeHTML(f.label)+'</strong>'+
       '<div class="lc-ref-text">'+escapeHTML(f.text)+'</div></div>';
     const renderImage=id=>{
       const d=data.images.find(z=>z.id===id);
@@ -115,7 +116,7 @@
     return '<section class="lc-doc-review" aria-label="信用狀案例'+escapeAttr(q.caseNumber)+'原題附件參考">'+
       '<div class="lc-doc-heading"><strong>案例'+escapeHTML(q.caseNumber)+'｜本題原始參考資料</strong>'+
       '<small>原 PDF 第 '+data.creditPage+' 頁</small></div>'+
-      '<p class="lc-doc-hint">'+(config.imageMode==='inline'?'本題需要辨認單據空格位置，先看原圖；點擊圖片可縮放。':'本題以原信用狀文字判讀為主。')+
+      '<p class="lc-doc-hint">'+(config.documentFacts?.length?'本題需要提單實際裝船日期及信用狀期限；可展開原圖核對。':config.imageMode==='inline'?'本題需要辨認單據空格位置，先看原圖；點擊圖片可縮放。':'本題以原信用狀文字判讀為主。')+
       ' 以下保留原文，不預先顯示答案。</p>'+
       (inlineImages?'<div class="lc-image-grid">'+inlineImages+'</div>':'')+
       '<div class="lc-source-fields">'+fields.map(renderField).join('')+'</div>'+

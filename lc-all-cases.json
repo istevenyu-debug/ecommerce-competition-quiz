@@ -229,9 +229,15 @@
             "44C",
             "48"
           ],
-          "imageMode": "none",
-          "images": [],
-          "showBill46A": false
+          "imageMode": "optional",
+          "images": [
+            "lc02-bl"
+          ],
+          "showBill46A": false,
+          "documentFacts": [
+            "blShippedOnBoard",
+            "blIssued"
+          ]
         },
         "T61-4": {
           "fields": [
@@ -308,6 +314,20 @@
             "lc02-bl"
           ],
           "showBill46A": true
+        }
+      },
+      "documentFacts": {
+        "blShippedOnBoard": {
+          "label": "提單 Shipped on Board Date（實際裝船日）",
+          "text": "MAR. 23, 2017",
+          "page": 65,
+          "imageId": "lc02-bl"
+        },
+        "blIssued": {
+          "label": "提單 Place and Date of Issue（簽發日）",
+          "text": "TAICHUNG MAR. 23, 2017",
+          "page": 65,
+          "imageId": "lc02-bl"
         }
       }
     },
@@ -531,9 +551,15 @@
             "31D",
             "44C"
           ],
-          "imageMode": "none",
-          "images": [],
-          "showBill46A": false
+          "imageMode": "optional",
+          "images": [
+            "lc04-bl"
+          ],
+          "showBill46A": false,
+          "documentFacts": [
+            "blShippedOnBoard",
+            "blIssued"
+          ]
         },
         "T71-4": {
           "fields": [
@@ -550,9 +576,14 @@
             "46A",
             "47A"
           ],
-          "imageMode": "none",
-          "images": [],
-          "showBill46A": false
+          "imageMode": "optional",
+          "images": [
+            "lc04-bl"
+          ],
+          "showBill46A": false,
+          "documentFacts": [
+            "blShippedOnBoard"
+          ]
         },
         "T71-6": {
           "fields": [
@@ -610,6 +641,20 @@
             "lc04-bl"
           ],
           "showBill46A": true
+        }
+      },
+      "documentFacts": {
+        "blShippedOnBoard": {
+          "label": "提單 Shipped on Board Date（實際裝船日）",
+          "text": "OCT. 22, 2020",
+          "page": 75,
+          "imageId": "lc04-bl"
+        },
+        "blIssued": {
+          "label": "提單 Place and Date of Issue（簽發日）",
+          "text": "TAICHUNG/ OCT. 22, 2020",
+          "page": 75,
+          "imageId": "lc04-bl"
         }
       }
     },
@@ -698,9 +743,15 @@
             "48",
             "44C"
           ],
-          "imageMode": "none",
-          "images": [],
-          "showBill46A": false
+          "imageMode": "optional",
+          "images": [
+            "lc05-bl"
+          ],
+          "showBill46A": false,
+          "documentFacts": [
+            "blShippedOnBoard",
+            "blIssued"
+          ]
         },
         "T76-5": {
           "fields": [
@@ -769,6 +820,20 @@
             "lc05-bl"
           ],
           "showBill46A": true
+        }
+      },
+      "documentFacts": {
+        "blShippedOnBoard": {
+          "label": "提單 Shipped on Board Date（實際裝船日）",
+          "text": "JULY 21, 2025",
+          "page": 80,
+          "imageId": "lc05-bl"
+        },
+        "blIssued": {
+          "label": "提單 Place / Date of Issue（簽發日）",
+          "text": "TAICHUNG / JULY 22, 2025",
+          "page": 80,
+          "imageId": "lc05-bl"
         }
       }
     }
