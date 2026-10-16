@@ -249,8 +249,17 @@
     if(q.caseId==='LC01'&&caseOne){
       const fields=caseOne.documents.flatMap(d=>d.fields.map(x=>({...x,document:d.title})));
       const mapping=new Map(fields.map(x=>[x.id,x]));
-      const fieldHtml=x=>'<div class="lc-field"><div class="lc-field-title">'+escapeHTML(x.document?x.document+'｜':'')+escapeHTML(x.label)+'</div><div class="lc-field-text">'+escapeHTML(x.text)+'</div></div>';
-      const snippets=(caseOne.questionFields[q.id]||[]).map(id=>mapping.get(id)).filter(Boolean).map(fieldHtml).join('');
+      const fieldHtml=x=>'<div class="lc-field'+(x.id==='lc-46A-bl'?' lc-critical-clause':'')+'"><div class="lc-field-title">'+escapeHTML(x.document?x.document+'｜':'')+escapeHTML(x.label)+'</div><div class="lc-field-text">'+escapeHTML(x.text)+'</div></div>';
+      // Present original 46A ocean B/L requirements before shipping-order
+      // or bill-of-lading fields, not the answer or any teacher-only warnings.
+      const citedFields=[...(caseOne.questionFields[q.id]||[])];
+      const questionText=[q.question,...q.options].join(' ');
+      const needsBLClause=/(?:提單|裝貨單|SHIPPING\s*-?\s*ORDER|BILL\s*OF\s*LADING|B\s*\/\s*L|S\s*\/\s*O)/i.test(questionText)||
+        citedFields.some(id=>id.startsWith('bl-'));
+      if(needsBLClause&&mapping.has('lc-46A-bl')){
+        citedFields.splice(0,citedFields.length,'lc-46A-bl',...citedFields.filter(id=>id!=='lc-46A-bl'));
+      }
+      const snippets=citedFields.map(id=>mapping.get(id)).filter(Boolean).map(fieldHtml).join('');
       const all=caseOne.documents.map(d=>'<details class="lc-document"><summary>'+escapeHTML(d.title)+'　（原 PDF 第 '+d.page+' 頁）</summary><div class="lc-document-body">'+d.fields.map(fieldHtml).join('')+'</div></details>').join('');
       return '<section class="lc-reference"><div class="lc-reference-heading"><strong>案例一｜本題相關條款與單據欄位</strong></div>'+
       '<p class="lc-ref-hint">保留原文及待填空格；上下滑動閱讀，不會預先顯示正解。</p>'+

@@ -436,6 +436,7 @@
       "draft-1"
     ],
     "T56-7": [
+      "lc-46A-bl",
       "invoice-5",
       "bl-vessel",
       "bl-voyage",
@@ -448,6 +449,7 @@
       "lc-45A"
     ],
     "T57-9": [
+      "lc-46A-bl",
       "draft-2",
       "draft-4",
       "invoice-6",
@@ -457,11 +459,11 @@
       "lc-50"
     ],
     "T57-10": [
+      "lc-46A-bl",
       "bl-8",
       "bl-11",
       "bl-12",
       "bl-13",
-      "lc-46A-bl",
       "lc-44F",
       "bl-pkgs"
     ]

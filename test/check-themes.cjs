@@ -9,5 +9,5 @@ for(const type of ['trade','ecom','mixed']){
 }
 assert.ok(app.includes("root.dataset.theme=currentTheme"),'theme not set when rendering');
 assert.ok(app.includes("setTheme(context?.source||state.mode)"),'quiz pages not themed');
-assert.ok(html.includes('lc-case1-refs1'),'cache-busting missing');
+assert.ok(html.includes('lc-case1-bl46a2'),'cache-busting missing');
 console.log('PASS: 3 pastel themes and themed quiz/explanation pages.');
