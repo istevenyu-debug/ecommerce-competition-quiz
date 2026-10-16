@@ -89,15 +89,32 @@
     const data=lcAll?.cases?.[q.caseId],config=data?.questions?.[q.id];
     if(!config)return '';
     const fields=[];
+    // Every original A–D choice is mapped to source evidence, never to the answer key.
+    // Show each distinct source once, neutrally, before the student chooses an answer.
+    const allOptionEvidence=data.optionEvidence?.[q.id];
+    const needed=new Set(allOptionEvidence?Object.values(allOptionEvidence).flat():[]);
+    for(const id of needed){
+      if(!id.startsWith('@'))continue;
+      const fact=data.originalFacts?.[id.slice(1)];
+      if(fact)fields.push({label:fact.title+'｜原題庫 PDF 第 '+fact.page+' 頁',text:fact.text,sourceDate:false});
+    }
     for(const id of config.documentFacts||[]){const fact=data.documentFacts?.[id];if(fact)fields.push({label:fact.label+'｜原 PDF 第 '+fact.page+' 頁',text:fact.text,sourceDate:true});}
     if(config.showBill46A&&data.creditBillClause)
       fields.push({label:'46A｜海運提單完整要求（原文）',text:data.creditBillClause,highlight:true});
-    for(const code of config.fields){
+    const creditCodes=new Set(config.fields);
+    for(const ref of needed){if(ref[0]!=='@'&&ref[0]!=='#')creditCodes.add(ref);}
+    for(const code of creditCodes){
       // Avoid showing a second copy of the entire 46A B/L requirement.
       // Other parts of 46A remain relevant to documentary-credit checks.
       const content=data.creditSections[code];
       if(!content)continue;
       fields.push({label:code+'｜信用狀原始條款',text:content});
+    }
+    const neutralEvidenceRules=[];
+    for(const ref of needed){
+      if(!ref.startsWith('#'))continue;
+      const rule=lcAll.neutralRules?.[ref.slice(1)];
+      if(rule)neutralEvidenceRules.push({label:rule.title+'｜中立規則',text:rule.text});
     }
     const renderField=f=>'<div class="lc-ref-field'+(f.highlight?' lc-bill-highlight':'')+(f.sourceDate?' lc-date-source':'')+'"><strong>'+escapeHTML(f.label)+'</strong>'+
       '<div class="lc-ref-text">'+escapeHTML(f.text)+'</div></div>';
@@ -119,7 +136,9 @@
       '<p class="lc-doc-hint">'+(config.documentFacts?.length?'本題需要提單實際裝船日期及信用狀期限；可展開原圖核對。':config.imageMode==='inline'?'本題需要辨認單據空格位置，先看原圖；點擊圖片可縮放。':'本題以原信用狀文字判讀為主。')+
       ' 以下保留原文，不預先顯示答案。</p>'+
       (inlineImages?'<div class="lc-image-grid">'+inlineImages+'</div>':'')+
-      '<div class="lc-source-fields">'+fields.map(renderField).join('')+'</div>'+
+      '<div class="lc-source-fields">'+fields.map(renderField).join('')+
+      (neutralEvidenceRules.length?'<details class="lc-practice-rules"><summary>審單時可使用的通則（不提示答案）</summary>'+neutralEvidenceRules.map(renderField).join('')+'</details>':'')+
+      '</div>'+
       optionalImages+creditFull+'</section>';
   }
 

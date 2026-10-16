@@ -17,5 +17,5 @@ assert.ok(app.includes('el.blur?.();'),'tapped button focus should clear');
 assert.ok(app.includes('const chapterOneNotice=source===\'trade\''),'missing optional first chapter');
 assert.ok(app.includes('一、經貿資訊'),'missing first chapter heading');
 assert.ok(!groups.chapters.some(c=>c.id==='T01'),'no invented first-chapter questions');
-assert.ok(html.includes('lc-onboard-dates4'),'updated JS cache-bust missing');
+assert.ok(html.includes('lc-five-evidence'),'updated JS cache-bust missing');
 console.log('PASS: mobile quiz header hidden, answer options reset and trade chapter one described without questions.');

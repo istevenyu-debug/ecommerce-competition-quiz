@@ -28,6 +28,7 @@ jobs:
           node test/check-lc-case1.cjs
           node test/check-lc-all.cjs
           node test/check-lc-shipment-dates.cjs
+          node test/check-lc-option-evidence.cjs
           node test/check-auto-next.cjs
       - name: Prepare static site
         run: |
