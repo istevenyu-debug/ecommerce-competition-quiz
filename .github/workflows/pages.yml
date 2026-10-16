@@ -24,6 +24,7 @@ jobs:
           node test/check-bank.cjs
           node test/check-explanations.cjs
           node test/check-themes.cjs
+          node test/check-mobile-quiz.cjs
           node test/check-auto-next.cjs
       - name: Prepare static site
         run: |

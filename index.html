@@ -120,10 +120,61 @@ body{padding:10px 8px 60px}
 #app[data-theme="mixed"] .option.selected{background:#efe4f9;border-color:#a588cf;outline-color:#dbcaef}
 #app[data-theme="trade"] .option.selected{background:#deedfd;border-color:#75a6d0;outline-color:#bdd5ed}
 
+
+/* The first exam scope chapter is present in the outline but not in the PDF's question bank. */
+.chapter-card.chapter-unavailable,
+.chapter-card.chapter-unavailable:hover{
+  cursor:default;
+  background:#f2f5f8!important;
+  color:#506579;
+  border:1px dashed #b9c7d4!important;
+}
+.chapter-unavailable .chapter-title{color:#506579}
+.chapter-unavailable .chapter-sub{color:#687b8b}
+@media (max-width:640px){
+  /* Hide the FOUR-LINE site banner only while actively answering questions. */
+  body.quiz-active{padding:0 0 30px;max-width:100%}
+  body.quiz-active > header{display:none!important}
+  body.quiz-active #app{
+    min-height:100dvh;
+    padding:max(14px,env(safe-area-inset-top)) 14px max(32px,env(safe-area-inset-bottom));
+    border-radius:0;
+    box-shadow:none;
+    border-left:0;
+    border-right:0;
+  }
+  body.quiz-active #app .topline{gap:6px}
+  body.quiz-active #app .eyebrow{font-size:.84rem;line-height:1.5}
+  body.quiz-active #app .chip{font-size:.75rem}
+  body.quiz-active #app .category{font-size:.78rem;margin:11px 0 5px}
+  body.quiz-active #app .question{font-size:1.2rem;line-height:1.7;margin:12px 0 19px}
+  body.quiz-active #app .option{
+    font-size:1.07rem;
+    min-height:60px;
+    padding:15px 12px;
+    margin:11px 0;
+    line-height:1.6;
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
+  }
+  body.quiz-active #app .option .letter{flex-basis:34px;height:34px}
+  body.quiz-active #app .auto-next-tip{font-size:.85rem;padding:8px 10px;margin:13px 0}
+}
+/* Touchscreens must not carry over the previous question's hover tint. */
+@media (hover:none), (pointer:coarse){
+  body.quiz-active .option:hover{filter:none!important}
+  body.quiz-active .option:not(.selected):hover{
+    background:#f6faff!important;
+    border-color:#c8daea!important;
+    outline:none!important;
+  }
+  body.quiz-active .option:not(.selected):focus:not(:focus-visible){outline:none!important}
+}
+
 </style>
 </head>
 <body>
-<header><h1>電商比賽刷題 APP</h1><p>國貿大會考 × 電子商務與跨境電商｜依章節分組，每卷最多 30 題</p><p class="muted" style="font-size:.78rem;margin-top:-12px">版本 2026.10.16｜三色章節練習・500 題詳解</p></header>
+<header><h1>電商比賽刷題 APP</h1><p>國貿大會考 × 電子商務與跨境電商｜依章節分組，每卷最多 30 題</p><p class="muted" style="font-size:.78rem;margin-top:-12px">版本 2026.10.16｜手機答題版面優化・500 題詳解</p></header>
 <main id="app" aria-live="polite">正在載入完整題庫與章節分組…</main>
-<script src="./app.js?v=20261016-explanations-pastel3" defer></script>
+<script src="./app.js?v=20261016-mobile-quiz-colors-2" defer></script>
 </body></html>

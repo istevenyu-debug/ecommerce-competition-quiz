@@ -22,7 +22,14 @@
   function store(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));return true;}catch(e){console.warn('無法儲存進度',e);return false;}}
   function escapeAttr(s){return escapeHTML(s);}
   function button(id,title,secondary=false){return '<button type="button" id="'+escapeAttr(id)+'"'+(secondary?' class="secondary"':'')+'>'+escapeHTML(title)+'</button>';}
-  function display(html){root.dataset.theme=currentTheme;root.innerHTML=html;window.scrollTo?.(0,0);}
+  function display(html, quizScreen=false){
+    // Only the live question screen hides the global heading on small screens.
+    // Every other page restores the heading without touching local score data.
+    root.dataset.theme=currentTheme;
+    document.body.classList.toggle('quiz-active',quizScreen);
+    root.innerHTML=html;
+    window.scrollTo?.(0,0);
+  }
   function summary(ids){
     const total=ids.length,seen=ids.filter(id=>Number(state.seen[id])>0).length,wrong=ids.filter(id=>state.wrong[id]).length;
     return {total,seen,wrong};
@@ -76,6 +83,12 @@
     state.mode=source;store();
     const items=manifest.chapters.filter(x=>x.source===source);
     const all=items.flatMap(c=>c.questionIds);
+    const chapterOneNotice=source==='trade'
+      ?'<div class="chapter-card chapter-unavailable" role="note" aria-label="第一章經貿資訊原始題庫未收錄">'+
+        '<span class="chapter-title">一、經貿資訊</span>'+
+        '<span class="chapter-sub">原始歷屆題庫未收錄本章試題，暫無題目可練習。</span>'+
+        '<span class="chapter-sub">此章仍屬考試範圍，不計入目前 400 題與 22 個題組。</span></div>'
+      :'';
     const cards=items.map(c=>{
       const s=summary(c.questionIds);
       return '<button class="chapter-card" data-chapter="'+escapeAttr(c.id)+'">'+
@@ -86,7 +99,7 @@
     }).join('');
     display(navigation('← 首頁')+'<h2>'+escapeHTML(sourceMeta.title)+'</h2>'+
       '<p class="muted">請選擇要練習的章節。同一章的題目會分在自己的題組，不與其他章混題。</p>'+
-      metrics(summary(all))+'<div class="chapter-grid">'+cards+'</div>'+draftButton());
+      metrics(summary(all))+'<div class="chapter-grid">'+chapterOneNotice+cards+'</div>'+draftButton());
     root.querySelector('#back').onclick=home;
     root.querySelectorAll('[data-chapter]').forEach(el=>el.onclick=()=>showGroups(el.dataset.chapter));
     bindResume();
@@ -244,11 +257,14 @@
         '<span class="letter">'+('ABCD'[j])+'</span><span>'+escapeHTML(o)+'</span></button>').join('')+
       '<div class="auto-next-tip">'+(pos===questionCount-1?'最後一題：選完答案後按「交卷」即可計分。':'✓ 自動跳題已開啟：直接點 A、B、C、D，立即進入下一題。')+'</div>'+
       '<div class="actions nav">'+button('previous','上一題',true)+(pos===questionCount-1?button('next','交卷'):(checked>=0?button('next','下一題',true):''))+'</div>'+
-      '<div class="actions">'+button('pause','暫存並回首頁',true)+'</div>');
+      '<div class="actions">'+button('pause','暫存並回首頁',true)+'</div>',true);
     root.querySelectorAll('[data-option]').forEach(el=>{
       el.addEventListener('click',()=>{
         const answeredPosition=pos;
         answers[answeredPosition]=Number(el.dataset.option);
+        // Explicitly clear the old tapped button's focus before rendering
+        // another question at the same on-screen button coordinates.
+        el.blur?.();
         if(answeredPosition<paper.length-1)pos=answeredPosition+1;
         saveDraft();
         showQuestion();

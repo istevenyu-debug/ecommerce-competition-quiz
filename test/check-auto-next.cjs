@@ -12,7 +12,7 @@ const script=[
 "let answers=[-1,-1,-1],pos=0,wrongOnly=false,context={display:'test'},state={mode:'trade'};",
 "let saved=0,completed=0; const labels={trade:'trade'}; const escapeHTML=s=>String(s); const button=(id,label)=>'<button id=\\\"'+id+'\\\">'+label+'</button>'; const attachmentNote=()=>'';",
 "const root={innerHTML:'',buttons:[],controls:{},querySelectorAll(){return this.buttons},querySelector(id){return this.controls[id]||null}};",
-"function display(html){ root.innerHTML=html; root.buttons=[0,1,2,3].map(n=>({dataset:{option:String(n)},clickHandler:null,addEventListener(name,handler){if(name==='click')this.clickHandler=handler}}));root.controls={'#previous':{disabled:false},'#pause':{}};if(html.includes('id=\\\"next\\\"'))root.controls['#next']={};}",
+"function display(html,quizScreen){ assert.equal(quizScreen,true,'the question screen should use compact mobile layout');root.innerHTML=html;root.buttons=[0,1,2,3].map(n=>({dataset:{option:String(n)},blurred:false,blur(){this.blurred=true},clickHandler:null,addEventListener(name,handler){if(name==='click')this.clickHandler=handler}}));root.controls={'#previous':{disabled:false},'#pause':{}};if(html.includes('id=\\\"next\\\"'))root.controls['#next']={};}",
 "function saveDraft(){saved++} function finish(){completed++} function home(){} function setTheme(){}",
 fn,
 "showQuestion(); assert.ok(root.innerHTML.includes('第 1 / 3 題')); assert.equal(root.controls['#next'],undefined);",
