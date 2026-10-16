@@ -11,6 +11,6 @@ assert.equal(data.cases.LC05.documentFacts.blIssued.text,'TAICHUNG / JULY 22, 20
 assert.notEqual(data.cases.LC05.documentFacts.blIssued.text,data.cases.LC05.documentFacts.blShippedOnBoard.text);
 const start=src.indexOf('  function renderLcReference(q){'),end=src.indexOf('  function display(',start);
 assert.ok(start>=0&&end>start);
-const render=vm.runInNewContext(src.slice(start,end)+'\nrenderLcReference',{lcAll:data,escapeHTML:s=>String(s??'')});
+const render=vm.runInNewContext(src.slice(start,end)+'\nrenderLcReference',{lcAll:data,escapeHTML:s=>String(s??''),escapeAttr:s=>String(s??'')});
 for(const [qid,cid,date] of specs){const q=questions.find(z=>z.id===qid),out=render(q);assert.ok(out.includes(date),qid+' missing date');assert.ok(out.includes('Shipped on Board Date'),qid+' missing on-board label');assert.ok(out.includes('查看原始單據圖'),qid+' missing source image');assert.ok(out.includes('48｜信用狀原始條款'),qid+' missing presentation period');}
 console.log('PASS: four LC questions include verified on-board dates and optional original B/L image.');
