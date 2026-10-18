@@ -30,12 +30,18 @@ jobs:
           node test/check-lc-shipment-dates.cjs
           node test/check-lc-option-evidence.cjs
           node test/check-auto-next.cjs
+          node --check speed-core.js
+          node --check speed-entry.js
+          node --check speed-training.js
+          node test/check-speed-core.cjs
+          node test/check-speed-isolation.cjs
       - name: Prepare static site
         run: |
           mkdir -p _site
           cp index.html app.js questions.json chapter-groups.json explanations.json lc-case1.json lc-all-cases.json .nojekyll _site/
           mkdir -p _site/assets/lc
           cp assets/lc/*.jpg _site/assets/lc/
+          node test/prepare-speed-site.cjs
       - uses: actions/configure-pages@v5
         with:
           enablement: true
