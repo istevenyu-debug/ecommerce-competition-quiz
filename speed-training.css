@@ -3,3 +3,9 @@
 @media(hover:hover) and (pointer:fine){button:not(:disabled):hover{filter:brightness(.97)}}
 @media(hover:none),(pointer:coarse){.speed-option:hover{filter:none}.speed-option:not(.chosen):hover{background:#fff8ee}}
 @media(max-width:640px){body{padding:10px 8px 45px}#speed-app{padding:19px 13px}.speed-limits{gap:5px}.speed-limits strong{font-size:1.18rem}.speed-limits small{font-size:.7rem}.actions>*{flex-basis:100%}body[data-screen=quiz]{padding:0 0 24px}body[data-screen=quiz] #speed-app{min-height:100dvh;border-radius:0;padding:max(13px,env(safe-area-inset-top)) 14px 30px;border-left:0;border-right:0}.speed-question{font-size:1.13rem}.speed-option{font-size:1.06rem;min-height:57px}.speed-scoreline{gap:8px 18px}.speed-scoreline strong{font-size:1.8rem}.speed-stats{gap:6px}.speed-stats>div{padding:10px 4px}.speed-review{padding:13px}.speed-clock{font-size:1.4rem}}
+
+/* Only speed mode gets concise L/C evidence; no images or full-document viewer. */
+.speed-lc-hint{border:1px solid #dfc99d;background:#fffaf0;border-radius:10px;padding:10px 12px;margin:10px 0 14px;color:#433923;font-size:.9rem;line-height:1.55;overflow-wrap:anywhere}
+.speed-lc-hint strong{display:block;color:#785819;font-size:.81rem;margin-bottom:4px}
+.speed-lc-hint div+div{margin-top:3px}
+@media(max-width:540px){.speed-lc-hint{font-size:.88rem;padding:9px 10px;line-height:1.5}}

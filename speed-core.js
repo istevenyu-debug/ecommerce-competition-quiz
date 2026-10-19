@@ -1,13 +1,27 @@
 /* Standalone speed-training engine. Never accesses regular quiz state. */
 (function (root, factory) {
-  const api = factory();
+  const lc = typeof module === 'object' && module.exports ? require('./speed-lc.js') : root.SpeedTrainingLC;
+  const api = factory(lc);
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.SpeedTrainingCore = api;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (LC) {
   'use strict';
   const LIMITS = Object.freeze([20, 15, 10, 5, 3]);
   const STORAGE_KEY = 'ecommerce-speed-training-v1';
-  const VERSION = 1;
+  const VERSION = 1; // Keep existing speed history and its storage key.
+  const MIX_VERSION = 2;
+  const hints = new Map((LC?.entries || []).map(entry => [entry.id, entry]));
+  function lcEligible(q) {
+    const hint = hints.get(q?.id);
+    return !!(q && q.source === 'trade' && q.chapterId === 'T12' && q.contextRequired &&
+      hint && hint.caseId === q.caseId && Array.isArray(hint.lines) && hint.lines.length &&
+      hint.lines.length <= 4 && hint.lines.every(s => typeof s === 'string' && s.trim()) &&
+      hint.lines.join('').length <= 240);
+  }
+  function withLCHint(q) {
+    const hint = hints.get(q.id);
+    return { ...q, speedHint: [...hint.lines], speedHintPages: [...hint.pages], speedHintVersion: LC.version };
+  }
   function shuffle(items, random = Math.random) {
     const a = [...items];
     for (let i = a.length - 1; i > 0; i--) {
@@ -29,17 +43,25 @@
       }
       ids.add(q.id);
     }
-    if (bank.filter(q => q.source === 'trade' && eligible(q)).length < 25 ||
-        bank.filter(q => q.source === 'ecom' && eligible(q)).length < 5) {
-      throw Error('題庫不足以組成國貿 25 題＋電商 5 題');
+    if (!LC || !Array.isArray(LC.entries) || hints.size !== LC.entries.length || hints.size < 2 ||
+        LC.entries.some(hint => !lcEligible(bank.find(q => q.id === hint.id)))) {
+      throw Error('L/C 精簡提示未完整載入，請重新整理；不會以無提示題目補數。');
+    }
+    if (bank.filter(q => q.source === 'trade' && eligible(q)).length < 23 ||
+        bank.filter(q => q.source === 'ecom' && eligible(q)).length < 5 ||
+        bank.filter(lcEligible).length < 2) {
+      throw Error('題庫不足以組成一般國貿 23 題＋L/C 2 題＋電商 5 題');
     }
     return true;
   }
   function selectPaper(bank, seen = {}, random = Math.random) {
     validateBank(bank);
-    const take = (source, n) => shuffle(bank.filter(q => q.source === source && eligible(q)), random)
+    const take = (pool, n) => shuffle(pool, random)
       .sort((a, b) => (Number(seen[a.id]) || 0) - (Number(seen[b.id]) || 0)).slice(0, n);
-    return shuffle([...take('trade', 25), ...take('ecom', 5)], random);
+    const general = take(bank.filter(q => q.source === 'trade' && eligible(q)), 23);
+    const lettersOfCredit = take(bank.filter(lcEligible), 2).map(withLCHint);
+    const ecommerce = take(bank.filter(q => q.source === 'ecom' && eligible(q)), 5);
+    return shuffle([...general, ...lettersOfCredit, ...ecommerce], random);
   }
   function scoreAnswer(question, choice, elapsedMs, limitSeconds) {
     if (!LIMITS.includes(limitSeconds) || !Number.isFinite(elapsedMs)) throw Error('計時參數錯誤');
@@ -104,6 +126,6 @@
     return String(Math.floor(tenths / 600)).padStart(2, '0') + ':' +
       String(Math.floor(tenths % 600 / 10)).padStart(2, '0') + '.' + (tenths % 10);
   }
-  return Object.freeze({ LIMITS, STORAGE_KEY, VERSION, shuffle, eligible, validateBank,
+  return Object.freeze({ LIMITS, STORAGE_KEY, VERSION, MIX_VERSION, shuffle, eligible, lcEligible, validateBank,
     selectPaper, scoreAnswer, QuestionClock, summarize, emptyState, loadState, addCompleted, formatTime });
 });
