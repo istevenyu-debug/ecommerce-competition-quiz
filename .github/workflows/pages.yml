@@ -35,6 +35,8 @@ jobs:
           node --check speed-training.js
           node test/check-speed-core.cjs
           node test/check-speed-isolation.cjs
+          node --check lc-front-summary.js
+          node test/check-lc-front-summary.cjs
       - name: Prepare static site
         run: |
           mkdir -p _site
